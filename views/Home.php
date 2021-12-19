@@ -216,13 +216,27 @@
          </div>
      </div>
 
-     <div class="container">
+     <div class="container mb-5">
          <div class="row row-header">
-             <div class="col-12 col-sm-4">
-
+             <div class="col-12 col-sm-12">
+                 <h1>THings To Maintain</h1>
 
              </div>
-             <div class="col-12 col-sm-4">
+         </div>
+         <div class="row row-header">
+             <div class="col-12 col-sm-3">
+                 <img class="d-block img-fluid" src="Pictures/mask.jpg" alt="mask">
+             </div>
+             <div class="col-12 col-sm-3">
+                 <img class="d-block img-fluid" src="Pictures/sanitizer.jpg" alt="sanitizer">
+
+             </div>
+             <div class="col-12 col-sm-3">
+                 <img class="d-block img-fluid" src="Pictures/distance.png" alt="distance">
+
+             </div>
+             <div class="col-12 col-sm-3">
+                 <img class="d-block img-fluid" src="Pictures/cough.png" alt="cough">
 
              </div>
          </div>
