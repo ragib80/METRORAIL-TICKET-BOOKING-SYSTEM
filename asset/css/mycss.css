@@ -1,41 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,900&display=swap');
-body {
-    margin: 1%;
-    background-color: #39a7e6c4;
-    text-align: center;
-    
-    
-}
-h1 {
-    text-align: center;
-    color:#1d3557;
-    font-size: 150%;
-    text-align: center;
-    text-transform: uppercase;
-    font-family: "Open Sans";
-}
-h2 {
-    text-align: center;
-    color:#1d3557;
-    font-size: 150%;
-    font-family: "Open Sans";
-    
-}
-h3 {
-    text-align: center;
-    color:#1d3557;
-    font-size: 150%;
-    font-family: "Open Sans";
-    
-}
 
-/*  */
-
-form {
-
-    display: inline-block;
-    margin-top: 10px;
-}
 
 section{
     margin: 0 auto;

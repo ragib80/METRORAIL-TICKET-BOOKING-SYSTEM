@@ -1,3 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,900&display=swap');
+
+h1 {
+  text-align: center;
+  color: #1d3557;
+  font-size: 250%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  color: #1d3557;
+  font-size: 120%;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
+
+h3 {
+  text-align: center;
+  color: #1d3557;
+  font-size: 100%;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
 .row-header {
   margin: 0px auto;
   padding: 0px 0px; }
@@ -16,8 +43,12 @@
 .jumbotron {
   margin: 0px auto;
   padding: 70px 30px;
-  background: #9575CD;
-  color: rgb(24, 21, 14); }
+
+  color: rgb(24, 21, 14); 
+    background-color: #f1faee;
+    padding: 20px;
+    text-align: center;
+    }
 
 address {
   font-size: 80%;

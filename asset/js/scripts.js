@@ -28,7 +28,10 @@ $(document).ready(function(){
                     $("#loginModal").modal('hide');
   });
 });
-            
+  //            $("#loginButton").click(function(){
+               
+  //                   $("#loginModal").modal('show');
+  // });            
             
         // $(document).ready(function(){
         //     $('[data-toggle="tooltip"]').tooltip();
@@ -45,3 +48,23 @@ $(document).ready(function(){
         //     });
         // });
    
+function validateLoginForm() {
+  var pass = document.getElementById("pass").value;
+  var email = document.getElementById("email").value;
+  var error = document.getElementById("error");
+  var patt = /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/;
+  var res = patt.test(email);
+  if (email == "" || pass == "") {
+    error.innerHTML = "ALL fields required js";
+    return false;
+  }
+  else if (!res) {
+    error.innerHTML = "Email format is not correct";
+    return false;
+  }
+  else if (pass.length < 6) {
+    error.innerHTML = "Password should be 6 characters long";
+    return false;
+  }
+
+}
