@@ -203,9 +203,9 @@ VALUES('$carname','$carm','$scount','$status','$fare','$customer_id','$driver_id
             $result = $conn->query("SELECT * FROM $table WHERE customer_id='$customer_id' ");
             return $result;
         }
-        function Show($conn, $table)
+        function ShowTicket($conn, $table)
         {
-            $result = $conn->query("SELECT * FROM $table ");
+            $result = oci_parse($conn,"SELECT * FROM $table ");
             return $result;
         }
         function ShowCar($conn, $table, $car_id)
@@ -217,9 +217,9 @@ VALUES('$carname','$carm','$scount','$status','$fare','$customer_id','$driver_id
             }
         }
 
-        function ShowRequestedCar($conn, $table, $car_id)
+        function ShowRequestedTicket($conn, $table, $ticket_id)
         {
-            $result = $conn->query("SELECT * FROM $table  WHERE car_id= '$car_id'");
+            $result = oci_parse($conn, "SELECT * FROM $table  WHERE TICKET_ID= '$ticket_id'");
             return $result;
         }
         function ShowAvailableCar($conn, $table, $availability)
