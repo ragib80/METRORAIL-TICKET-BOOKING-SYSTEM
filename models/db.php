@@ -21,8 +21,8 @@
             $dbuser = "scott";
             $dbpass = "tiger";
             // $db = "ridehub";
-            
-            $this->conn = @oci_connect($dbuser, $dbpass,$dbhost);
+
+            $this->conn = @oci_connect($dbuser, $dbpass, $dbhost);
             return $this->conn;
         }
         function CheckUser($conn, $table, $email, $password)
@@ -119,8 +119,6 @@ VALUES('$carname','$carm','$scount','$status','$fare','$customer_id','$driver_id
 
             $data = oci_parse($conn, "select ADMIN_EMAIL,ADMIN_PASSWORD from $table where ADMIN_EMAIL='$email' and ADMIN_PASSWORD='$password'");
             return $data;
-       
-            
         }
 
 
@@ -130,7 +128,7 @@ VALUES('$carname','$carm','$scount','$status','$fare','$customer_id','$driver_id
         {
             $result = "UPDATE $table SET name='$name', email='$email',password='$pass', address='$address' , phone='$phone' WHERE email='$email'";
             $error = "";
-                     if ($conn->query($result) === TRUE) {
+            if ($conn->query($result) === TRUE) {
                 return $result . $error;
             } else {
                 $error = "Error: " . $result . "<br>" . $conn->error;
@@ -203,9 +201,10 @@ VALUES('$carname','$carm','$scount','$status','$fare','$customer_id','$driver_id
             $result = $conn->query("SELECT * FROM $table WHERE customer_id='$customer_id' ");
             return $result;
         }
-        function ShowTicket($conn, $table)
+        function ShowTicket($conn, $table, $from, $to,$date, $table1)
         {
-            $result = oci_parse($conn,"SELECT * FROM $table ");
+            $result = oci_parse($conn, "SELECT t.*,d.destination_from,d.destination_to from $table t , $table1 d where 
+           destination_from='$from' and destination_to='$to' and ticket_date='$date' and t.destination_id=d.destination_id");
             return $result;
         }
         function ShowCar($conn, $table, $car_id)

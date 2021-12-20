@@ -114,26 +114,27 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $from = $_REQUEST["from"];
                 $to = $_REQUEST["to"];
-                $date = $_REQUEST["date"];
                 $connection = new db();
                 $conobj = $connection->OpenCon();
-                $userQuery = $connection->ShowTicket($conobj, "ticket", $from, $to,$date, "destination");
+                $userQuery = $connection->ShowTicket($conobj, "ticket", $from, $to, "destination");
                 oci_execute($userQuery);
                 // $row = oci_fetch_assoc($userQuery);
-                // if (oci_num_rows($userQuery) > 0) {
-                    echo "<table><tr><th>TICKET_NO</th><th>TICKET_DATE</th><th>TICKET_DESCRIPTION</th><th>TICKET_TIME</th><th>From</th><th>To</th><th>Action</th></tr>";
-                    // output data of each row
-                    // print_r($row);
-                    while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                        echo "<tr><td>" . $row["TICKET_NO"] . "</td><td>" . $row["TICKET_DATE"] . "</td><td>" . $row["TICKET_DESCRIPTION"] . "</td><td>" . $row["TICKET_TIME"] . "</td><td>" . $row["DESTINATION_FROM"] . "</td><td>" . $row["DESTINATION_TO"] . "</td><td>" . "<a href='../views/ticket.php?TICKET_ID=" . $row["TICKET_ID"] . "'>View</a>" . "</td></tr>";
+                print '<table border="1">  <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Complain Topic</th>
+            <th scope="col" colspan="2">Complain Details</th>
+
+        </tr>';
+                while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
+
+                    foreach ($row as $item) {
+                        print '<td>' . ($item !== null ? htmlentities($item, ENT_QUOTES) : '&nbsp') . '</td>';
                     }
-                    echo "</table>";
+                    print '</tr>';
                 }
-                 else {
-                    echo "0 results";
-                }
+                print '</table>';
                 $connection->CloseCon($conobj);
-            
+            }
             ?>
 
         </div>

@@ -128,7 +128,7 @@
                      <button type="button" class="close" id="hider">&times;</button>
                  </div>
                  <div class="modal-body">
-                     <form class="form-check" id="ReserveTable" action="Search.php">
+                     <form class="form-check" id="ReserveTable" action="Search.php" method="POST">
                          <div class="form-group row">
                              <label for="from" class="col-12 col-md-2 col-form-label">From</label>
                              <div class="col-7 col-md-10">
@@ -145,7 +145,7 @@
                          <div class="form-group row">
                              <label for="dateandtime" class="col-md-2 col-form-label">Date</label>
                              <div class="col-md-5">
-                                 <input type="date" class="form-control" id="date" name="date" placeholder="Date">
+                                 <input type="text" class="form-control" id="date" name="date" placeholder="Date">
                              </div>
 
                          </div>
