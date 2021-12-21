@@ -27,9 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // print_r($row);
         if ($row) {
             $_SESSION["username"] = $row['ADMIN_EMAIL'];
+            $_SESSION["userid"] = $row['ADMIN_ID'];
+
             // $_SESSION["email"] = $row['EMAIL'];
             // $_SESSION["pass"] = $row['PASSWORD'];
-            header("location: ../views/adminDashboard.php");
+            header("location: ../views/UserHome.php");
             $_SESSION['success'] = "Login Successful";
         } else {
             $error = "Username or Password is invalid";

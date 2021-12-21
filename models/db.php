@@ -102,16 +102,12 @@ VALUES('$name','$email','$password','$type')";
                 $error = "Error: " . $result . "<br>" . $conn->error;
             }
         }
-        function InsertCarRequest($conn, $table, $carname, $carm, $scount, $status, $fare, $customer_id, $driver_id, $status_driver)
+        function InsertPaymentRequest($conn, $table, $PAYMENT_ID,$PAYMENT_DESCRIPTION,$PAYMENT_AMOUNT,$USERS_ID)
         {
-            $result = "INSERT INTO " . $table . "(carname,carmodel,sitcount,status_vendor,fareperh,customer_id,driver_id,status_driver)
-VALUES('$carname','$carm','$scount','$status','$fare','$customer_id','$driver_id','$status_driver')";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result . $error;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
+            $result = oci_parse($conn,"INSERT INTO " . $table . "(PAYMENT_ID,PAYMENT_DESCRIPTION,PAYMENT_AMOUNT,USERS_ID)
+VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
+            return $result;
+
         }
 
         function ValidateLogin($conn, $table, $email, $password)
@@ -201,24 +197,16 @@ VALUES('$carname','$carm','$scount','$status','$fare','$customer_id','$driver_id
             $result = $conn->query("SELECT * FROM $table WHERE customer_id='$customer_id' ");
             return $result;
         }
-        function ShowTicket($conn, $table, $from, $to,$date, $table1)
+        function ShowTicket($conn, $table, $from, $to, $date, $table1)
         {
             $result = oci_parse($conn, "SELECT t.*,d.destination_from,d.destination_to from $table t , $table1 d where 
            destination_from='$from' and destination_to='$to' and ticket_date='$date' and t.destination_id=d.destination_id");
             return $result;
         }
-        function ShowCar($conn, $table, $car_id)
-        {
-            $result = $conn->query("SELECT * FROM $table WHERE car_id ='$car_id'");
 
-            while ($row = mysqli_fetch_array($result)) {
-                echo '<img height ="300" width = "300" src="data:image;base64, ' . $row['carphoto'] . '">';
-            }
-        }
-
-        function ShowRequestedTicket($conn, $table, $ticket_id)
+        function ShowRequestedTicket($conn, $table, $ticket_id, $table2)
         {
-            $result = oci_parse($conn, "SELECT * FROM $table  WHERE TICKET_ID= '$ticket_id'");
+            $result = oci_parse($conn, "select t.*,p.payment_amount,d.DESTINATION_FROM,d.DESTINATION_TO from ticket t,payment p,destination d where TICKET_ID= '$ticket_id' and t.PAYMENT_ID=p.PAYMENT_ID and t.DESTINATION_ID=d.DESTINATION_ID");
             return $result;
         }
         function ShowAvailableCar($conn, $table, $availability)

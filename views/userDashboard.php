@@ -37,12 +37,14 @@
                 <a class='btn btn-outline-danger' href='logout.php'> Logout </a>
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap" aria-expanded="true" aria-controls="collapseBootstrap">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+                    aria-expanded="true" aria-controls="collapseBootstrap">
                     <i class="far fa-fw fa-window-maximize"></i>
                     <span>Booking Tickets</span>
                 </a>
 
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Bootstrap UI</h6>
                         <a class="collapse-item" href="alerts.html">Alerts</a>
@@ -55,7 +57,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true" aria-controls="collapseForm">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
+                    aria-expanded="true" aria-controls="collapseForm">
                     <i class="fab fa-fw fa-wpforms"></i>
                     <span>Purshed Tickets </span>
                 </a>
@@ -70,7 +73,8 @@
 
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true" aria-controls="collapseTable">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
+                    aria-expanded="true" aria-controls="collapseTable">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Track Train</span>
                 </a>
@@ -93,7 +97,8 @@
                 Complains
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="userComplain.php" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePage">
+                <a class="nav-link collapsed" href="userComplain.php" data-toggle="collapse" data-target="#collapsePage"
+                    aria-expanded="true" aria-controls="collapsePage">
                     <i class="fas fa-fw fa-columns"></i>
                     <span>New Complain</span>
                 </a>
@@ -132,9 +137,12 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="../Asset/images/boy.png" style="max-width: 60px">
-                                <span class="ml-2 d-none d-lg-inline text-white small"><?php echo "Logged in as " . $_SESSION['username']; ?></span>
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="img-profile rounded-circle" src="../Asset/images/boy.png"
+                                    style="max-width: 60px">
+                                <span
+                                    class="ml-2 d-none d-lg-inline text-white small"><?php echo "Logged in as " . $_SESSION['username']; ?></span>
                             </a>
 
                         </li>
@@ -149,12 +157,14 @@
                     </div>
 
                     <div class="row mb-3">
-                        <h1>WELCOME to Metro Rail Ticket System, <?php echo "" . $_SESSION['username'] . " and your id: " . $_SESSION['userid']; ?> </h1>
+                        <h1>WELCOME to Metro Rail Ticket System,
+                            <?php echo "" . $_SESSION['username'] . " and your id: " . $_SESSION['userid']; ?> </h1>
 
 
 
                         <!-- Modal Logout -->
-                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
+                        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -167,7 +177,8 @@
                                         <p>Are you sure you want to logout?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-outline-primary"
+                                            data-dismiss="modal">Cancel</button>
                                         <a href="login.html" class="btn btn-primary">Logout</a>
                                     </div>
                                 </div>
@@ -182,7 +193,7 @@
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
                             <span>copyright &copy; <script>
-                                    document.write(new Date().getFullYear());
+                                document.write(new Date().getFullYear());
                                 </script> - developed by
                                 <b><a href="https://indrijunanda.gitlab.io/" target="_blank">DataRanges</a></b>
                             </span>

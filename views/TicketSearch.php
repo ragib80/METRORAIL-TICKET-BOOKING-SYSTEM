@@ -1,62 +1,3 @@
-<?php
-require('../controllers/ValidationLogin.php');
-// if (!isset($_SESSION['email'])) {
-//     die('Not logged in');
-// }
-
-if (isset($_POST['cancel'])) {
-    // Redirect the browser to CustomerHome.php
-    header("Location: Search.php");
-    return;
-}
-
-// // Guardian: Make sure that pcar name is present
-// if (!isset($_GET['users_id'])) {
-//     $_SESSION['error'] = "Missing users id";
-//     header('Location: Home.php');
-//     return;
-// }
-// include('../models/db.php');
-$TICKET_ID = $_GET["TICKET_ID"];
-$connection = new db();
-$conobj = $connection->OpenCon();
-// $customer_id = $_SESSION["customer_id"];
-
-$userQuery = $connection->ShowRequestedTicket($conobj, "ticket", $TICKET_ID, "payment");
-oci_execute($userQuery);
-$row = oci_fetch_assoc($userQuery);
-if (oci_num_rows($userQuery) > 0) {
-
-
-    // print_r($row);
-    $TICKET_ID = $row['TICKET_ID'];
-    $TICKET_NO = $row['TICKET_NO'];
-    $TICKET_DATE = $row['TICKET_DATE'];
-    $TICKET_DESCRIPTION = $row['TICKET_DESCRIPTION'];
-    $TICKET_TIME = $row['TICKET_TIME'];
-    $DESTINATION_FROM = $row['DESTINATION_FROM'];
-    $DESTINATION_TO = $row['DESTINATION_TO'];
-    $PAYMENT_AMOUNT = $row['PAYMENT_AMOUNT'];
-    $USERS_ID = $_SESSION['userid'];
-
-    if (isset($_POST['update'])) {
-        $connection = new db();
-        $conobj = $connection->OpenCon();
-        $connection->InsertPaymentRequest($conobj, "payment", $PAYMENT_ID,$PAYMENT_DESCRIPTION,$PAYMENT_AMOUNT,$USERS_ID);
-        $connection->CloseCon($conobj);
-        $_SESSION['success'] = "Request Succesful";
-        header("Location: login.php");
-        return;
-    }
-}
-else {
-    $_SESSION['error'] = "Request Unsuccesful";
-    header("Location: Home.php");
-    return;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +9,7 @@ else {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../asset/css/styles.css">
-    <title>Ticket Profile</title>
+    <title>Available Ticket</title>
 
 
 </head>
@@ -80,22 +21,19 @@ else {
             <a class="navbar-brand mr-auto" href="#"><img src="Pictures/icon.jpg" height="30" width="41"></a>
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span>
+                    <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
+                                class="fa fa-home fa-lg"></span>
                             Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
-                                class="fa fa-info fa-lg"></span> About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Menu</a>
-                    </li>
+                                class="fa fa-info fa-lg"></span> My Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
+                                class="fa fa-address-card fa-lg"></span> Log Out</a></li>
                 </ul>
                 <!-- Modal Login-->
-                <span class="navbar-text">
-                    <!-- <a data-toggle="modal" data-target="#loginModal"> -->
-                    <a role="button" id="login">
 
-                        <span class="fa fa-sign-in"></span> Login</a>
-                </span>
                 <!-- Modal Login -->
             </div>
 
@@ -104,6 +42,20 @@ else {
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>
+
+    <?php
+    if (isset($_SESSION['success'])) {
+        echo ('<p id="msg">' . htmlentities($_SESSION['success']) . "</p>");
+        unset($_SESSION['success']);
+    }
+    if (isset($_SESSION['error'])) {
+        echo ('<p id="error">' . htmlentities($_SESSION['error']) . "</p>");
+        unset($_SESSION['error']);
+    }
+
+
+
+    ?>
 
     <!-- Login Modal Start -->
     <div id="loginModal" class="modal fade" role="dialog">
@@ -160,50 +112,72 @@ else {
         </div>
     </div>
     <!--Login  Modal End -->
-
     <!-- main -->
-    <section class="pad-70 right m-5 ">
-        <div class="container">
-
-            <div class="row">
-                <div class="post post-right">
-                    <br>
-                    TICKET ID: <?php echo $TICKET_ID; ?>
-                    <hr>
-                    TICKET NO: <?php echo $TICKET_NO; ?>
-                    <hr>
-                    TICKET DATE: <?php echo $TICKET_DATE; ?>
-                    <hr>
-                    TICKET DESCRIPTION: <?php echo $TICKET_DESCRIPTION; ?>
-                    <br>
-                </div>
-                <div class="post post-left ml-3">
-                    <br>
-                    TICKET Price: <?php echo $PAYMENT_AMOUNT; ?> Taka
-                    <hr>
-                    DESTINATION FROM: <?php echo $DESTINATION_FROM; ?>
-                    <hr>
-                    DESTINATION To: <?php echo $DESTINATION_TO; ?>
-                    <hr>
-                    TICKET Time: <?php echo $TICKET_TIME; ?>
-                    <br>
-                </div>
-
-            </div>
-            <form action='' method='post'>
-                <h2>Do you want to Request It?</h2>
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="submit" value="Proceed" name="update" class="btn btn-lg btn-primary">
-                        <input type="submit" value="Cancel" name="cancel" class="btn btn-lg btn-primary">
+    <section>
+        <div class="container mt-5">
+            <h1>
+                Available Ticket
+            </h1>
+            <div class="modal-body">
+                <form class="form-check" id="ReserveTable" action="TicketSearch.php" method="POST">
+                    <div class="form-group row">
+                        <label for="from" class="col-12 col-md-2 col-form-label">From</label>
+                        <div class="col-7 col-md-10">
+                            <input type="text" class="form-control" id="from" name="from" placeholder="From">
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group row">
+                        <label for="from" class="col-12 col-md-2 col-form-label">To</label>
+                        <div class="col-7 col-md-10">
+                            <input type="text" class="form-control" id="to" name="to" placeholder="To">
+                        </div>
+                    </div>
 
-            </form>
+                    <div class="form-group row">
+                        <label for="dateandtime" class="col-md-2 col-form-label">Date</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="date" name="date" placeholder="Date">
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-md-2 col-md-4">
+                            <button type="submit" class="btn btn-primary btn-sm ml-1">Search A Ticket</button>
+                            <button type="button" class="btn btn-secondary btn-sm ml-auto"
+                                data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <?php
+            // session_start();
+            include('../models/db.php');
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $from = $_REQUEST["from"];
+                $to = $_REQUEST["to"];
+                $date = $_REQUEST["date"];
+                $connection = new db();
+                $conobj = $connection->OpenCon();
+                $userQuery = $connection->ShowTicket($conobj, "ticket", $from, $to, $date, "destination");
+                oci_execute($userQuery);
+                // $row = oci_fetch_assoc($userQuery);
+                // if (oci_num_rows($userQuery) > 0) {
+                echo "<table><tr><th>TICKET_NO</th><th>TICKET_DATE</th><th>TICKET_DESCRIPTION</th><th>TICKET_TIME</th><th>From</th><th>To</th><th>Action</th></tr>";
+                // output data of each row
+                // print_r($row);
+                while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                    echo "<tr><td>" . $row["TICKET_NO"] . "</td><td>" . $row["TICKET_DATE"] . "</td><td>" . $row["TICKET_DESCRIPTION"] . "</td><td>" . $row["TICKET_TIME"] . "</td><td>" . $row["DESTINATION_FROM"] . "</td><td>" . $row["DESTINATION_TO"] . "</td><td>" . "<a href='../views/ticket.php?TICKET_ID=" . $row["TICKET_ID"] . "'>View</a>" . "</td></tr>";
+                }
+                echo "</table>";
+                $connection->CloseCon($conobj);
+            } else {
+                echo "0 results";
+            }
+
+            ?>
+
         </div>
     </section>
-
-
     <!-- main -->
     <!-- footer -->
     <footer>
@@ -230,6 +204,9 @@ else {
     </footer>
     <!-- footer -->
     <script src="https://kit.fontawesome.com/2065a5e896.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
 </body>
 
 </html>

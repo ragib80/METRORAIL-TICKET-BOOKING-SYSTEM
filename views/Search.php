@@ -107,7 +107,37 @@
             <h1>
                 Available Ticket
             </h1>
+            <div class="modal-body">
+                <form class="form-check" id="ReserveTable" action="Search.php" method="POST">
+                    <div class="form-group row">
+                        <label for="from" class="col-12 col-md-2 col-form-label">From</label>
+                        <div class="col-7 col-md-10">
+                            <input type="text" class="form-control" id="from" name="from" placeholder="From">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="from" class="col-12 col-md-2 col-form-label">To</label>
+                        <div class="col-7 col-md-10">
+                            <input type="text" class="form-control" id="to" name="to" placeholder="To">
+                        </div>
+                    </div>
 
+                    <div class="form-group row">
+                        <label for="dateandtime" class="col-md-2 col-form-label">Date</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="date" name="date" placeholder="Date">
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-md-2 col-md-4">
+                            <button type="submit" class="btn btn-primary btn-sm ml-1">Search A Ticket</button>
+                            <button type="button" class="btn btn-secondary btn-sm ml-auto"
+                                data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <?php
             // session_start();
             include('../models/db.php');
@@ -117,23 +147,22 @@
                 $date = $_REQUEST["date"];
                 $connection = new db();
                 $conobj = $connection->OpenCon();
-                $userQuery = $connection->ShowTicket($conobj, "ticket", $from, $to,$date, "destination");
+                $userQuery = $connection->ShowTicket($conobj, "ticket", $from, $to, $date, "destination");
                 oci_execute($userQuery);
                 // $row = oci_fetch_assoc($userQuery);
                 // if (oci_num_rows($userQuery) > 0) {
-                    echo "<table><tr><th>TICKET_NO</th><th>TICKET_DATE</th><th>TICKET_DESCRIPTION</th><th>TICKET_TIME</th><th>From</th><th>To</th><th>Action</th></tr>";
-                    // output data of each row
-                    // print_r($row);
-                    while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                        echo "<tr><td>" . $row["TICKET_NO"] . "</td><td>" . $row["TICKET_DATE"] . "</td><td>" . $row["TICKET_DESCRIPTION"] . "</td><td>" . $row["TICKET_TIME"] . "</td><td>" . $row["DESTINATION_FROM"] . "</td><td>" . $row["DESTINATION_TO"] . "</td><td>" . "<a href='../views/ticket.php?TICKET_ID=" . $row["TICKET_ID"] . "'>View</a>" . "</td></tr>";
-                    }
-                    echo "</table>";
+                echo "<table><tr><th>TICKET_NO</th><th>TICKET_DATE</th><th>TICKET_DESCRIPTION</th><th>TICKET_TIME</th><th>From</th><th>To</th><th>Action</th></tr>";
+                // output data of each row
+                // print_r($row);
+                while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                    echo "<tr><td>" . $row["TICKET_NO"] . "</td><td>" . $row["TICKET_DATE"] . "</td><td>" . $row["TICKET_DESCRIPTION"] . "</td><td>" . $row["TICKET_TIME"] . "</td><td>" . $row["DESTINATION_FROM"] . "</td><td>" . $row["DESTINATION_TO"] . "</td><td>" . "<a href='../views/ticket.php?TICKET_ID=" . $row["TICKET_ID"] . "'>View</a>" . "</td></tr>";
                 }
-                 else {
-                    echo "0 results";
-                }
+                echo "</table>";
                 $connection->CloseCon($conobj);
-            
+            } else {
+                echo "0 results";
+            }
+
             ?>
 
         </div>
