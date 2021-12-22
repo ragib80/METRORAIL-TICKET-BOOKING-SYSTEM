@@ -44,6 +44,7 @@
     </nav>
 
     <?php
+            session_start();
     if (isset($_SESSION['success'])) {
         echo ('<p id="msg">' . htmlentities($_SESSION['success']) . "</p>");
         unset($_SESSION['success']);
@@ -120,11 +121,12 @@
             </h1>
 
             <?php
-            // session_start();
+        
             include('../models/db.php');
             $connection = new db();
             $conobj = $connection->OpenCon();
-            $userQuery = $connection->ShowComplain($conobj, "complain");
+            $users_id = $_SESSION['userid'];
+            $userQuery = $connection->ShowComplain($conobj, "complain",$users_id);
             oci_execute($userQuery);
             // $row = oci_fetch_assoc($userQuery);
             // if (oci_num_rows($userQuery) > 0) {

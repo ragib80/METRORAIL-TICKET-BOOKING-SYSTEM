@@ -1,14 +1,15 @@
 <?php
 require_once('../models/db.php');
+session_start();
 $connection = new db();
 
 if (isset($_POST['submit'])) {
 
     $complain = $_POST['complainDetails'];
     $type = $_POST['type'];
-
+    $users_id = $_SESSION['userid'];
     $conobj = $connection->OpenCon();
-    $userQuery = $connection->InsertComplain($conobj, "complain", $complain, $type);
+    $userQuery = $connection->InsertComplain($conobj, "complain", $complain, $type, $users_id);
     $r = oci_execute($userQuery);
     // $row = oci_fetch_assoc($userQuery);
     // print_r($row);

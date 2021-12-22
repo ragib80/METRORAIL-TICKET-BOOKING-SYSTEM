@@ -1,4 +1,6 @@
 <?php
+// session_start();
+// include('../models/db.php');
 require('../controllers/ValidationLogin.php');
 // if (!isset($_SESSION['email'])) {
 //     die('Not logged in');
@@ -17,18 +19,65 @@ if (isset($_POST['cancel'])) {
 //     return;
 // }
 // include('../models/db.php');
+// $TICKET_ID = $_GET["TICKET_ID"];
+// $connection = new db();
+// $conobj = $connection->OpenCon();
+// // $customer_id = $_SESSION["customer_id"];
+
+// $userQuery = $connection->ShowRequestedTicket($conobj, "ticket", $TICKET_ID, "payment");
+// $r = oci_execute($userQuery);
+
+// if (isset($_POST['update'])) {
+//     $connection = new db();
+//     $conobj = $connection->OpenCon();
+//     $connection->InsertPaymentRequest($conobj, "payment", $PAYMENT_ID, $PAYMENT_DESCRIPTION, $PAYMENT_AMOUNT, $USERS_ID);
+//     $connection->CloseCon($conobj);
+//     $_SESSION['success'] = "Request Successful";
+//     header("Location: UserHome.php");
+//     return;
+// }
+// if ($r) {
+
+//     $row = oci_fetch_assoc($userQuery);
+//     // print_r($row);
+//     $TICKET_ID = $row['TICKET_ID'];
+//     $TICKET_NO = $row['TICKET_NO'];
+//     $TICKET_DATE = $row['TICKET_DATE'];
+//     $TICKET_DESCRIPTION = $row['TICKET_DESCRIPTION'];
+//     $TICKET_TIME = $row['TICKET_TIME'];
+//     $DESTINATION_FROM = $row['DESTINATION_FROM'];
+//     $DESTINATION_TO = $row['DESTINATION_TO'];
+//     $PAYMENT_AMOUNT = $row['PAYMENT_AMOUNT'];
+//     $USERS_ID = $_SESSION['userid'];
+// } else {
+//     $_SESSION['error'] = "Request UnSuccessful";
+//     header("Location: Home.php");
+//     return;
+// }
+
+
+require_once('../models/db.php');
+$connection = new db();
 $TICKET_ID = $_GET["TICKET_ID"];
 $connection = new db();
 $conobj = $connection->OpenCon();
 // $customer_id = $_SESSION["customer_id"];
 
 $userQuery = $connection->ShowRequestedTicket($conobj, "ticket", $TICKET_ID, "payment");
-oci_execute($userQuery);
+$r = oci_execute($userQuery);
 $row = oci_fetch_assoc($userQuery);
-if (oci_num_rows($userQuery) > 0) {
-
-
-    // print_r($row);
+// print_r($row);
+$TICKET_ID = $row['TICKET_ID'];
+$TICKET_NO = $row['TICKET_NO'];
+$TICKET_DATE = $row['TICKET_DATE'];
+$TICKET_DESCRIPTION = $row['TICKET_DESCRIPTION'];
+$TICKET_TIME = $row['TICKET_TIME'];
+$DESTINATION_FROM = $row['DESTINATION_FROM'];
+$DESTINATION_TO = $row['DESTINATION_TO'];
+$PAYMENT_AMOUNT = $row['PAYMENT_AMOUNT'];
+$USERS_ID = $_SESSION['userid'];
+ $PAYMENT_DESCRIPTION = $row['PAYMENT_DESCRIPTION'];
+if (isset($_POST['proceed'])) {
     $TICKET_ID = $row['TICKET_ID'];
     $TICKET_NO = $row['TICKET_NO'];
     $TICKET_DATE = $row['TICKET_DATE'];
@@ -37,26 +86,33 @@ if (oci_num_rows($userQuery) > 0) {
     $DESTINATION_FROM = $row['DESTINATION_FROM'];
     $DESTINATION_TO = $row['DESTINATION_TO'];
     $PAYMENT_AMOUNT = $row['PAYMENT_AMOUNT'];
+    $PAYMENT_DESCRIPTION = $row['PAYMENT_DESCRIPTION'];
     $USERS_ID = $_SESSION['userid'];
+    // $complain = $_POST['complainDetails'];
+    // $type = $_POST['type'];
 
-    if (isset($_POST['update'])) {
-        $connection = new db();
-        $conobj = $connection->OpenCon();
-        $connection->InsertPaymentRequest($conobj, "payment", $PAYMENT_ID,$PAYMENT_DESCRIPTION,$PAYMENT_AMOUNT,$USERS_ID);
-        $connection->CloseCon($conobj);
-        $_SESSION['success'] = "Request Succesful";
-        header("Location: login.php");
-        return;
+    $conobj = $connection->OpenCon();
+    $userQuery = $connection->InsertPaymentRequest($conobj, "payment", $PAYMENT_ID, $PAYMENT_DESCRIPTION, $PAYMENT_AMOUNT, $USERS_ID);
+    $r = oci_execute($userQuery);
+    // $row = oci_fetch_assoc($userQuery);
+    // print_r($row);
+    if ($r) {
+        // $_SESSION["username"] = $row['ADMIN_EMAIL'];
+        // $_SESSION["userid"] = $row['ADMIN_ID'];
+
+        // $_SESSION["email"] = $row['EMAIL'];
+        // $_SESSION["pass"] = $row['PASSWORD'];
+        header("location: ../views/PreviousComplain.php");
+        // $_SESSION['success'] = "Login Successful";
+    } else {
+        $error = "Username or Password is invalid";
     }
-}
-else {
-    $_SESSION['error'] = "Request Unsuccesful";
-    header("Location: Home.php");
-    return;
-}
 
+
+    // header("../views/PreviousComplain.php");
+    $connection->CloseCon($conobj);
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,6 +171,7 @@ else {
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <button type="button" class="close" id="hidel">&times;</button>
                 </div>
+
                 <div class="modal-body">
                     <?php
                     // Note triple not equals and think how badly double
@@ -164,7 +221,14 @@ else {
     <!-- main -->
     <section class="pad-70 right m-5 ">
         <div class="container">
+            <div class="row row-header">
+                <div class="col-12 col-sm-12">
+                    <h1>Welcome TO Metaverse</h1>
+                    <h3>
+                        <?php echo "" . $_SESSION['username'] . " and your id: " . $_SESSION['userid']; ?> </h3>
 
+                </div>
+            </div>
             <div class="row">
                 <div class="post post-right">
                     <br>
@@ -194,7 +258,7 @@ else {
                 <h2>Do you want to Request It?</h2>
                 <div class="form-row">
                     <div class="form-group">
-                        <input type="submit" value="Proceed" name="update" class="btn btn-lg btn-primary">
+                        <input type="submit" value="Proceed" name="proceed" class="btn btn-lg btn-primary">
                         <input type="submit" value="Cancel" name="cancel" class="btn btn-lg btn-primary">
                     </div>
                 </div>

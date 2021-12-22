@@ -22,19 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connection = new db();
         $conobj = $connection->OpenCon();
         $userQuery = $connection->ValidateLogin($conobj, "admin", $email, $pass);
-        oci_execute($userQuery);
-        $row = oci_fetch_assoc($userQuery);
-        // print_r($row);
-        if ($row) {
-            $_SESSION["username"] = $row['ADMIN_EMAIL'];
-            $_SESSION["userid"] = $row['ADMIN_ID'];
-
-            // $_SESSION["email"] = $row['EMAIL'];
-            // $_SESSION["pass"] = $row['PASSWORD'];
+        $data = oci_execute($userQuery);
+        if ($data) {
+            $row = oci_fetch_assoc($userQuery);
+            //$_SESSION['username'] = $user;
+            $_SESSION['username'] = $row['ADMIN_EMAIL'];
+            $_SESSION['userid'] = $row['ADMIN_ID'];
+            // $_SESSION['id'] = $id;
+            $_SESSION['time_start_login'] = time();
             header("location: ../views/UserHome.php");
-            $_SESSION['success'] = "Login Successful";
+            //header("location: dashboard.php");
         } else {
-            $error = "Username or Password is invalid";
+
+            echo "wrong password or username";
         }
 
 

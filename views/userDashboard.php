@@ -158,7 +158,7 @@
 
                     <div class="row mb-3">
                         <h1>WELCOME to Metro Rail Ticket System,
-                            <?php echo "" . $_SESSION['username'] . " and your id: " . $_SESSION['userid']; ?> </h1>
+                            <?php echo "" . $_SESSION['userid'] . " and your id: " . $_SESSION['userid']; ?> </h1>
 
 
 

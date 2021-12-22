@@ -84,22 +84,25 @@ VALUES('$name','$email','$password','$type')";
             }
         }
 
-        function InsertComplain($conn, $table, $complain, $type)
+        function InsertComplain($conn, $table, $complain, $type,$users_id)
         {
-            $data = oci_parse($conn, "insert into $table VALUES (complain_complain_id_seq.NEXTVAL,'" . $complain . "','" . $type . "')");
+            $data = oci_parse($conn, "insert into $table VALUES (complain_complain_id_seq.NEXTVAL,'" . $complain . "','" . $type . "','" . $users_id . "')");
             return $data;
         }
         function InsertPaymentRequest($conn, $table, $PAYMENT_ID, $PAYMENT_DESCRIPTION, $PAYMENT_AMOUNT, $USERS_ID)
         {
-            $result = oci_parse($conn, "INSERT INTO " . $table . "(PAYMENT_ID,PAYMENT_DESCRIPTION,PAYMENT_AMOUNT,USERS_ID)
-VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
+            $result = oci_parse(
+                $conn,
+                "INSERT INTO payment(payment_id , payment_description, payment_amount,users_id)
+VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$USERS_ID)"
+            );
             return $result;
         }
 
         function ValidateLogin($conn, $table, $email, $password)
         {
 
-            $data = oci_parse($conn, "select ADMIN_EMAIL,ADMIN_PASSWORD from $table where ADMIN_EMAIL='$email' and ADMIN_PASSWORD='$password'");
+            $data = oci_parse($conn, "select * from $table where ADMIN_EMAIL='$email' and ADMIN_PASSWORD='$password'");
             return $data;
         }
 
@@ -183,9 +186,14 @@ VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
             $result = $conn->query("SELECT * FROM $table WHERE customer_id='$customer_id' ");
             return $result;
         }
-        function ShowComplain($conn, $table)
+        function ShowComplain($conn, $table,$users_id)
         {
-            $result = oci_parse($conn, "SELECT * From $table order by complain_id desc");
+            $result = oci_parse($conn, "SELECT * From $table where users_id='$users_id' order by complain_id desc");
+            return $result;
+        }
+        function ShowPurchasedTicket($conn, $table,$users_id)
+        {
+            $result = oci_parse($conn, "SELECT * From $table where users_id='$users_id' order by payment_id desc");
             return $result;
         }
         function ShowComplainId($conn, $table, $complain_id)
@@ -202,7 +210,7 @@ VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
         }
         function ShowRequestedTicket($conn, $table, $ticket_id, $table2)
         {
-            $result = oci_parse($conn, "select t.*,p.payment_amount,d.DESTINATION_FROM,d.DESTINATION_TO from ticket t,payment p,destination d where TICKET_ID= '$ticket_id' and t.PAYMENT_ID=p.PAYMENT_ID and t.DESTINATION_ID=d.DESTINATION_ID");
+            $result = oci_parse($conn, "select t.*,p.payment_amount,p.payment_description,d.DESTINATION_FROM,d.DESTINATION_TO from ticket t,payment p,destination d where TICKET_ID= '$ticket_id' and t.PAYMENT_ID=p.PAYMENT_ID and t.DESTINATION_ID=d.DESTINATION_ID");
             return $result;
         }
         function ShowAvailableCar($conn, $table, $availability)

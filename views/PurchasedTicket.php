@@ -44,7 +44,7 @@
     </nav>
 
     <?php
-    session_start();
+            session_start();
     if (isset($_SESSION['success'])) {
         echo ('<p id="msg">' . htmlentities($_SESSION['success']) . "</p>");
         unset($_SESSION['success']);
@@ -64,7 +64,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Login </h4>
+                    <h4 class="modal-title">Location </h4>
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <button type="button" class="close" id="hidel">&times;</button>
                 </div>
@@ -117,73 +117,31 @@
     <section>
         <div class="container mt-5">
             <h1>
-                Available Ticket
+                Purchased Ticket
             </h1>
-            <div class="modal-body">
-                <form class="form-check" id="ReserveTable" action="TicketSearch.php" method="POST">
-                    <div class="form-group row">
-                        <label for="from" class="col-12 col-md-2 col-form-label">From</label>
-                        <div class="col-7 col-md-10">
-                            <input type="text" class="form-control" id="from" name="from" placeholder="From">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="from" class="col-12 col-md-2 col-form-label">To</label>
-                        <div class="col-7 col-md-10">
-                            <input type="text" class="form-control" id="to" name="to" placeholder="To">
-                        </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <label for="dateandtime" class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" id="date" name="date" placeholder="Date">
-                        </div>
-
-                    </div>
-                    <div class="form-group row">
-                        <div class="offset-md-2 col-md-4">
-                            <button type="submit" class="btn btn-primary btn-sm ml-1">Search A Ticket</button>
-                            <button type="button" class="btn btn-secondary btn-sm ml-auto"
-                                data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
             <?php
-
+        
             include('../models/db.php');
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $from = $_REQUEST["from"];
-                $to = $_REQUEST["to"];
-                $date = $_REQUEST["date"];
-                $connection = new db();
-                $conobj = $connection->OpenCon();
-                $userQuery = $connection->ShowTicket($conobj, "ticket", $from, $to, $date, "destination");
-                oci_execute($userQuery);
-                // $row = oci_fetch_assoc($userQuery);
-                // if (oci_num_rows($userQuery) > 0) {
-                echo "<table><tr><th>TICKET_NO</th><th>TICKET_DATE</th><th>TICKET_DESCRIPTION</th><th>TICKET_TIME</th><th>From</th><th>To</th><th>Action</th></tr>";
-                // output data of each row
-                // print_r($row);
-                while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                    echo "<tr><td>" . $row["TICKET_NO"] . "</td><td>" . $row["TICKET_DATE"] . "</td><td>" . $row["TICKET_DESCRIPTION"] . "</td><td>" . $row["TICKET_TIME"] . "</td><td>" . $row["DESTINATION_FROM"] . "</td><td>" . $row["DESTINATION_TO"] . "</td><td>" . "<a href='../views/ticket.php?TICKET_ID=" . $row["TICKET_ID"] . "' class='btn btn-primary btn-sm ml-1 pr-5'>View</a>" . "</td></tr>";
-                }
-                echo "</table>";
-                $connection->CloseCon($conobj);
-            } else {
-                echo "0 results";
+            $connection = new db();
+            $conobj = $connection->OpenCon();
+            $user_id = $_SESSION['userid'];
+            $userQuery = $connection->ShowPurchasedTicket($conobj, "payment",$user_id);
+            oci_execute($userQuery);
+            // $row = oci_fetch_assoc($userQuery);
+            // if (oci_num_rows($userQuery) > 0) {
+            echo "<table><tr><th>PAYMENT_ID</th><th>PAYMENT_DESCRIPTION</th><th>PAYMENT_AMOUNT</th><th>USERS_ID</th></tr>";
+            // output data of each row
+            // print_r($row);
+            while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                echo "<tr><td>" . $row["PAYMENT_ID"] . "</td><td>" . $row["PAYMENT_DESCRIPTION"] . "</td><td>" . $row["PAYMENT_AMOUNT"] .
+                    "</td><td>" . $row["USERS_ID"] . "</td></tr>";
             }
+            echo "</table>";
+            $connection->CloseCon($conobj);
 
             ?>
-            <div class="row row-header">
-                <div class="col-12 col-sm-12">
-                    <h1>Welcome TO Metaverse</h1>
-                    <h3>
-                        <?php echo "" . $_SESSION['username'] . " and your id: " . $_SESSION['userid']; ?> </h3>
 
-                </div>
-            </div>
         </div>
     </section>
     <!-- main -->

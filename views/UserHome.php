@@ -1,6 +1,6 @@
 <?php
-// session_start();
-// include('../model/db.php');
+session_start();
+include('../models/db.php');
 // if (!isset($_SESSION['email'])) {
 //     header('Location: login.php');
 // } else if (isset($_SESSION['email'])) {
@@ -91,18 +91,27 @@
         <div class="row row-header">
             <div class="col-12 col-sm-12">
                 <h1>Welcome TO Metaverse</h1>
+                <h3>
+                    <?php echo "" . $_SESSION['username'] . " and your id: " . $_SESSION['userid']; ?> </h3>
 
             </div>
         </div>
         <div class="row row-header">
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-sm-4">
                 <img class="d-block img-fluid" src="Pictures/train-ticket.jpg" alt="mask">
                 <a class="btn btn-primary m-2" href="TicketSearch.php">Book A Ticket</a>
             </div>
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-sm-4">
                 <img class="d-block img-fluid" src="Pictures/track.jpg" alt="sanitizer">
                 <a class="btn btn-primary m-2" href="Location.php">Track A Train</a>
             </div>
+            <div class="col-12 col-sm-4">
+                <img class="d-block img-fluid" src="Pictures/ticket.jpg" alt="ticket">
+                <a class="btn btn-primary m-2" href="PurchasedTicket.php">Purchased Ticket</a>
+            </div>
+
+        </div>
+        <div class="row row-header">
             <div class="col-12 col-sm-3">
                 <img class="d-block img-fluid" src="Pictures/complaints.jpg" alt="distance">
                 <a class="btn btn-primary m-2" href="userComplain.php">Register Complain</a>
@@ -111,6 +120,7 @@
                 <img class="d-block img-fluid" src="Pictures/complanit.jpg" alt="cough">
                 <a class="btn btn-primary m-2" href="../views/PreviousComplain.php">Previous Complain</a>
             </div>
+
         </div>
     </div>
     <!-- main  -->
