@@ -1,23 +1,32 @@
 <?php
-require_once('../models/dbcon.php');
-$db = getConnection();
+require_once('../models/db.php');
 
+
+
+$connection = new db();
 if (isset($_POST['submit'])) {
 
     $complain = $_POST['complainDetails'];
     $type = $_POST['type'];
 
+    $conobj = $connection->OpenCon();
+    $userQuery = $connection->InsertComplain($conobj, "complain", $complain, $type);
+    oci_execute($userQuery);
+    // $row = oci_fetch_assoc($userQuery);
+    // print_r($row);
+    // if ($row) {
+    //     $_SESSION["username"] = $row['ADMIN_EMAIL'];
+    //     $_SESSION["userid"] = $row['ADMIN_ID'];
 
-    $sql = "insert into complain VALUES (complain_complain_id_seq.NEXTVAL,'" . $complain . "','" . $type . "')";
+    //     // $_SESSION["email"] = $row['EMAIL'];
+    //     // $_SESSION["pass"] = $row['PASSWORD'];
+    //     header("location: ../views/UserHome.php");
+    //     $_SESSION['success'] = "Login Successful";
+    // } else {
+    //     $error = "Username or Password is invalid";
+    // }
 
 
-
-    $st = oci_parse($db, $sql);
-    $r = oci_execute($st);
-    if ($r) {
-        echo ' data is inserted...<br>';
-        header("location: ../views/userDashboard.php");
-    } else {
-        echo 'data was not inserted...<br>';
-    }
+    header("../views/PreviousComplain.php");
 }
+$connection->CloseCon($conobj);

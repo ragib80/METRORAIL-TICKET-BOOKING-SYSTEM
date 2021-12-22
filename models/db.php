@@ -84,30 +84,16 @@ VALUES('$name','$email','$password','$type')";
             }
         }
 
-        function InsertCar($conn, $table, $carname, $carm, $scount, $carphoto, $availability, $fare)
+        function InsertComplain($conn, $table, $complain, $type)
         {
-
-            $carphoto = addslashes($_FILES["carphoto"]["tmp_name"]);
-            $name = addslashes($_FILES["name"]["tmp_name"]);
-            $carphoto = file_get_contents($carphoto);
-            $carphoto = base64_encode($carphoto);
-            $result = "INSERT INTO " . $table . " (carname,carmodel,sitcount,carphoto,availability,fareperh)
-                VALUES('$carname','$carm','$scount','$carphoto','$availability','$fare')";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                $success = "Data inserted into Car table successfully";
-                header('Location:VendorHome.php');
-                return $result . $success;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
+            $data = oci_parse($conn, "insert into $table VALUES (complain_complain_id_seq.NEXTVAL,'" . $complain . "','" . $type . "')");
+            return $data;
         }
-        function InsertPaymentRequest($conn, $table, $PAYMENT_ID,$PAYMENT_DESCRIPTION,$PAYMENT_AMOUNT,$USERS_ID)
+        function InsertPaymentRequest($conn, $table, $PAYMENT_ID, $PAYMENT_DESCRIPTION, $PAYMENT_AMOUNT, $USERS_ID)
         {
-            $result = oci_parse($conn,"INSERT INTO " . $table . "(PAYMENT_ID,PAYMENT_DESCRIPTION,PAYMENT_AMOUNT,USERS_ID)
+            $result = oci_parse($conn, "INSERT INTO " . $table . "(PAYMENT_ID,PAYMENT_DESCRIPTION,PAYMENT_AMOUNT,USERS_ID)
 VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
             return $result;
-
         }
 
         function ValidateLogin($conn, $table, $email, $password)
@@ -187,9 +173,9 @@ VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
                 $error = "Error: " . $result . "<br>" . $conn->error;
             }
         }
-        function ShowAll($conn, $table, $email)
+        function ShowLocation($conn, $table)
         {
-            $result = $conn->query("SELECT * FROM $table WHERE email='$email' ");
+            $result = oci_parse($conn, "SELECT * FROM $table");
             return $result;
         }
         function ShowAllByCustomerID($conn, $table, $customer_id)
@@ -197,13 +183,23 @@ VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
             $result = $conn->query("SELECT * FROM $table WHERE customer_id='$customer_id' ");
             return $result;
         }
+        function ShowComplain($conn, $table)
+        {
+            $result = oci_parse($conn, "SELECT * From $table order by complain_id desc");
+            return $result;
+        }
+        function ShowComplainId($conn, $table, $complain_id)
+        {
+            $result = oci_parse($conn, "SELECT * From $table where complain_id='$complain_id'");
+            return $result;
+        }
+
         function ShowTicket($conn, $table, $from, $to, $date, $table1)
         {
             $result = oci_parse($conn, "SELECT t.*,d.destination_from,d.destination_to from $table t , $table1 d where 
            destination_from='$from' and destination_to='$to' and ticket_date='$date' and t.destination_id=d.destination_id");
             return $result;
         }
-
         function ShowRequestedTicket($conn, $table, $ticket_id, $table2)
         {
             $result = oci_parse($conn, "select t.*,p.payment_amount,d.DESTINATION_FROM,d.DESTINATION_TO from ticket t,payment p,destination d where TICKET_ID= '$ticket_id' and t.PAYMENT_ID=p.PAYMENT_ID and t.DESTINATION_ID=d.DESTINATION_ID");
@@ -219,9 +215,9 @@ VALUES('$PAYMENT_ID','$PAYMENT_DESCRIPTION','$PAYMENT_AMOUNT','$USERS_ID')");
             $result = $conn->query("SELECT * FROM $table  WHERE carname= '$name'");
             return $result;
         }
-        function DeleteUser($conn, $table, $customer_id)
+        function DeleteComplain($conn, $table, $complain_id)
         {
-            $result = $conn->query("DELETE FROM $table WHERE customer_id = '$customer_id'");
+            $result = oci_parse($conn, "DELETE FROM $table WHERE complain_id = '$complain_id'");
             return $result;
         }
         function DeleteVendor($conn, $table, $vendor_id)

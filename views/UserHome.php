@@ -101,15 +101,15 @@
             </div>
             <div class="col-12 col-sm-3">
                 <img class="d-block img-fluid" src="Pictures/track.jpg" alt="sanitizer">
-                <a class="btn btn-primary m-2" href="registration.php">Track A Train</a>
+                <a class="btn btn-primary m-2" href="Location.php">Track A Train</a>
             </div>
             <div class="col-12 col-sm-3">
                 <img class="d-block img-fluid" src="Pictures/complaints.jpg" alt="distance">
-                <a class="btn btn-primary m-2" href="registration.php">Register Complain</a>
+                <a class="btn btn-primary m-2" href="userComplain.php">Register Complain</a>
             </div>
             <div class="col-12 col-sm-3">
                 <img class="d-block img-fluid" src="Pictures/complanit.jpg" alt="cough">
-                <a class="btn btn-primary m-2" href="registration.php">Previous Complain</a>
+                <a class="btn btn-primary m-2" href="../views/PreviousComplain.php">Previous Complain</a>
             </div>
         </div>
     </div>
