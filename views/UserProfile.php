@@ -1,3 +1,37 @@
+<?php
+session_start();
+include('../models/db.php');
+// $email = $_SESSION["email"];
+// if (!isset($_SESSION['email'])) {
+//     header('Location: login.php');
+// } else if (isset($_SESSION['email'])) {
+//     if ($_SESSION['type'] == "Vendor") {
+//         header('Location: VendorHome.php');
+//     }
+//     if ($_SESSION['type'] == "Admin") {
+//         header('Location: AdminHome.php');
+//     }
+//     if ($_SESSION['type'] == "driver") {
+//         header('Location: DriverHome.php');
+//     }
+// }
+
+$connection = new db();
+$conobj = $connection->OpenCon();
+$id = $_SESSION['userid'];
+$userQuery = $connection->ShowUserProfile($conobj, "users", $id);
+oci_execute($userQuery);
+$row = oci_fetch_assoc($userQuery);
+// print_r($row);
+
+$name = $row['USERS_NAME'];
+$email = $row['USERS_EMAIL'];
+$password = $row['USERS_PASSWORD'];
+
+
+$connection->CloseCon($conobj);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +43,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../asset/css/styles.css">
-    <title>Available Ticket</title>
+    <title>User Profile</title>
 
 
 </head>
@@ -24,16 +58,13 @@
                     <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
                                 class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
-                                class="fa fa-info fa-lg"></span>
-                            My
-                            Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
+                                class="fa fa-info fa-lg"></span> My Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="logout.php"><span
-                                class="fa fa-sign-out fa-lg"></span>
-                            Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
+                                class="fa fa-sign-out fa-lg"></span> Log Out</a></li>
                 </ul>
                 <!-- Modal Login-->
 
@@ -46,55 +77,19 @@
         </button>
     </nav>
 
-    <?php
-    session_start();
-    if (isset($_SESSION['success'])) {
-        echo ('<p id="msg">' . htmlentities($_SESSION['success']) . "</p>");
-        unset($_SESSION['success']);
-    }
-    if (isset($_SESSION['error'])) {
-        echo ('<p id="error">' . htmlentities($_SESSION['error']) . "</p>");
-        unset($_SESSION['error']);
-    }
-
-
-
-    ?>
-
-
-    <!-- main -->
-    <section>
-        <div class="container mt-5">
-            <h1>
-                Purchased Ticket
-            </h1>
-
-            <?php
-
-            include('../models/db.php');
-            $connection = new db();
-            $conobj = $connection->OpenCon();
-            $user_id = $_SESSION['userid'];
-            $userQuery = $connection->ShowPurchasedTicket($conobj, "payment", $user_id);
-            oci_execute($userQuery);
-            // $row = oci_fetch_assoc($userQuery);
-            // if (oci_num_rows($userQuery) > 0) {
-            echo "<table><tr><th>PAYMENT_ID</th><th>PAYMENT_DESCRIPTION</th><th>PAYMENT_AMOUNT</th><th>USERS_ID</th></tr>";
-            // output data of each row
-            // print_r($row);
-            while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                echo "<tr><td>" . $row["PAYMENT_ID"] . "</td><td>" . $row["PAYMENT_DESCRIPTION"] . "</td><td>" . $row["PAYMENT_AMOUNT"] .
-                    "</td><td>" . $row["USERS_ID"] . "</td></tr>";
-            }
-            echo "</table>";
-            $connection->CloseCon($conobj);
-
-            ?>
-
+    <section class="pad-70 right m-5">
+        <div class="container">
+            <p><img src="Pictures/customer.jpg" alt="Home" class="center"></p>
+            Name: <?php echo $name; ?>
+            <hr>
+            Email: <?php echo $email; ?>
+            <hr>
+            Password: <?php echo $password; ?>
+            <hr>
+            <br>
+            <a class="btn btn-lg btn-primary" href="UpdateCustomer.php">Update </a>
         </div>
     </section>
-    <!-- main -->
-    <!-- footer -->
     <footer>
         <div class="container footer-wrap">
             <div class="footer-left">
@@ -117,11 +112,7 @@
 
 
     </footer>
-    <!-- footer -->
     <script src="https://kit.fontawesome.com/2065a5e896.js" crossorigin="anonymous"></script>
-</body>
-
-</html>
 </body>
 
 </html>

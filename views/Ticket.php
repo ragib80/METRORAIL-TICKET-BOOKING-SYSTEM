@@ -8,16 +8,20 @@ require('../controllers/ValidationLogin.php');
 
 if (isset($_POST['cancel'])) {
     // Redirect the browser to CustomerHome.php
-    header("Location: Search.php");
+    header("Location: UserHome.php");
     return;
 }
 
-// // Guardian: Make sure that pcar name is present
-// if (!isset($_GET['users_id'])) {
-//     $_SESSION['error'] = "Missing users id";
-//     header('Location: Home.php');
-//     return;
-// }
+// Guardian: Make sure that pcar name is present
+if (!isset($_GET['TICKET_ID'])) {
+    $_SESSION['error'] = "Missing users id";
+    header('Location: Search.php');
+    return;
+}
+if (!isset($_SESSION['userid'])) {
+    header('Location: login.php');
+    return;
+}
 // include('../models/db.php');
 // $TICKET_ID = $_GET["TICKET_ID"];
 // $connection = new db();
@@ -76,7 +80,7 @@ $DESTINATION_FROM = $row['DESTINATION_FROM'];
 $DESTINATION_TO = $row['DESTINATION_TO'];
 $PAYMENT_AMOUNT = $row['PAYMENT_AMOUNT'];
 $USERS_ID = $_SESSION['userid'];
- $PAYMENT_DESCRIPTION = $row['PAYMENT_DESCRIPTION'];
+$PAYMENT_DESCRIPTION = $row['PAYMENT_DESCRIPTION'];
 if (isset($_POST['proceed'])) {
     $TICKET_ID = $row['TICKET_ID'];
     $TICKET_NO = $row['TICKET_NO'];
@@ -102,7 +106,7 @@ if (isset($_POST['proceed'])) {
 
         // $_SESSION["email"] = $row['EMAIL'];
         // $_SESSION["pass"] = $row['PASSWORD'];
-        header("location: ../views/PreviousComplain.php");
+        header("location: ../views/PurchasedTicket.php");
         // $_SESSION['success'] = "Login Successful";
     } else {
         $error = "Username or Password is invalid";
@@ -136,22 +140,22 @@ if (isset($_POST['proceed'])) {
             <a class="navbar-brand mr-auto" href="#"><img src="Pictures/icon.jpg" height="30" width="41"></a>
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span>
+                    <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
+                                class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
-                                class="fa fa-info fa-lg"></span> About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Menu</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
+                                class="fa fa-info fa-lg"></span>
+                            My
+                            Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="logout.php"><span
+                                class="fa fa-sign-out fa-lg"></span>
+                            Log Out</a></li>
                 </ul>
                 <!-- Modal Login-->
-                <span class="navbar-text">
-                    <!-- <a data-toggle="modal" data-target="#loginModal"> -->
-                    <a role="button" id="login">
 
-                        <span class="fa fa-sign-in"></span> Login</a>
-                </span>
                 <!-- Modal Login -->
             </div>
 
@@ -160,63 +164,6 @@ if (isset($_POST['proceed'])) {
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>
-
-    <!-- Login Modal Start -->
-    <div id="loginModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg" role="content">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Login </h4>
-                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                    <button type="button" class="close" id="hidel">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <?php
-                    // Note triple not equals and think how badly double
-                    // not equals would work here...
-                    if ($error !== false) {
-                        // Look closely at the use of single and double quotes
-                        echo ('<p style="color: red;" class="col-sm-10 col-sm-offset-2">' .
-                            htmlentities($error) .
-                            "</p>\n");
-                    }
-                    ?>
-                    <p id="error">
-                    </p>
-                    <form method="post">
-                        <div class="form-row">
-                            <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                                <input type="email" name="email" id="email" class=" form-control form-control-sm mr-1"
-                                    id="exampleInputEmail3" placeholder="Enter email">
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputPassword3">Password</label>
-                                <input type="password" name="pass" id="pass" class="form-control form-control-sm mr-1"
-                                    id="exampleInputPassword3" placeholder="Password">
-                            </div>
-                            <div class="col-sm-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox">
-                                    <label class="form-check-label"> Remember me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <button type="button" class="btn btn-secondary btn-md ml-auto"
-                                data-dismiss="modal">Cancel</button>
-                            <button type="submit" id="loginButton" value="Login" name="login"
-                                class="btn btn-primary btn-md ml-1">Log in</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Login  Modal End -->
 
     <!-- main -->
     <section class="pad-70 right m-5 ">

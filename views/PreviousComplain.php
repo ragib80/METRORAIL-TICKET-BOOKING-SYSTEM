@@ -24,13 +24,16 @@
                     <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
                                 class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
-                                class="fa fa-info fa-lg"></span> My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
+                                class="fa fa-info fa-lg"></span>
+                            My
+                            Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                class="fa fa-address-card fa-lg"></span> Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php"><span
+                                class="fa fa-sign-out fa-lg"></span>
+                            Log Out</a></li>
                 </ul>
                 <!-- Modal Login-->
 
@@ -44,7 +47,7 @@
     </nav>
 
     <?php
-            session_start();
+    session_start();
     if (isset($_SESSION['success'])) {
         echo ('<p id="msg">' . htmlentities($_SESSION['success']) . "</p>");
         unset($_SESSION['success']);
@@ -58,61 +61,7 @@
 
     ?>
 
-    <!-- Login Modal Start -->
-    <div id="loginModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg" role="content">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Location </h4>
-                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                    <button type="button" class="close" id="hidel">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <?php
-                    // Note triple not equals and think how badly double
-                    // not equals would work here...
-                    if ($error !== false) {
-                        // Look closely at the use of single and double quotes
-                        echo ('<p style="color: red;" class="col-sm-10 col-sm-offset-2">' .
-                            htmlentities($error) .
-                            "</p>\n");
-                    }
-                    ?>
-                    <p id="error">
-                    </p>
-                    <form method="post">
-                        <div class="form-row">
-                            <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                                <input type="email" name="email" id="email" class=" form-control form-control-sm mr-1"
-                                    id="exampleInputEmail3" placeholder="Enter email">
-                            </div>
-                            <div class="form-group col-sm-4">
-                                <label class="sr-only" for="exampleInputPassword3">Password</label>
-                                <input type="password" name="pass" id="pass" class="form-control form-control-sm mr-1"
-                                    id="exampleInputPassword3" placeholder="Password">
-                            </div>
-                            <div class="col-sm-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox">
-                                    <label class="form-check-label"> Remember me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <button type="button" class="btn btn-secondary btn-md ml-auto"
-                                data-dismiss="modal">Cancel</button>
-                            <button type="submit" id="loginButton" value="Login" name="login"
-                                class="btn btn-primary btn-md ml-1">Log in</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Login  Modal End -->
+
     <!-- main -->
     <section>
         <div class="container mt-5">
@@ -121,12 +70,12 @@
             </h1>
 
             <?php
-        
+
             include('../models/db.php');
             $connection = new db();
             $conobj = $connection->OpenCon();
             $users_id = $_SESSION['userid'];
-            $userQuery = $connection->ShowComplain($conobj, "complain",$users_id);
+            $userQuery = $connection->ShowComplain($conobj, "complain", $users_id);
             oci_execute($userQuery);
             // $row = oci_fetch_assoc($userQuery);
             // if (oci_num_rows($userQuery) > 0) {

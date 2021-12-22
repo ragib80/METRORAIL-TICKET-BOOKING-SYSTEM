@@ -54,13 +54,16 @@ if (isset($_POST['submit'])) {
                     <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
                                 class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
-                                class="fa fa-info fa-lg"></span> My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
+                                class="fa fa-info fa-lg"></span>
+                            My
+                            Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                class="fa fa-address-card fa-lg"></span> Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php"><span
+                                class="fa fa-sign-out fa-lg"></span>
+                            Log Out</a></li>
                 </ul>
                 <!-- Modal Login-->
 
@@ -68,11 +71,9 @@ if (isset($_POST['submit'])) {
             </div>
 
         </div>
-        <div>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </nav>
     <div class="container-fluid m-5" id="container-wrapper">
         <form method="post" action="">

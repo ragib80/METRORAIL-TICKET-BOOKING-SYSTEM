@@ -42,7 +42,8 @@
              <a class="navbar-brand mr-auto" href="#"><img src="Pictures/icon.jpg" height="30" width="41"></a>
              <div class="collapse navbar-collapse" id="Navbar">
                  <ul class="navbar-nav mr-auto">
-                     <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span>
+                     <li class="nav-item active"><a class="nav-link" href="Home.php"><span
+                                 class="fa fa-home fa-lg"></span>
                              Home</a></li>
                      <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
                                  class="fa fa-info fa-lg"></span> About</a></li>

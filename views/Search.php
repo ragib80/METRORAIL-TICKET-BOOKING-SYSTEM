@@ -21,7 +21,8 @@
             <a class="navbar-brand mr-auto" href="#"><img src="Pictures/icon.jpg" height="30" width="41"></a>
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span>
+                    <li class="nav-item active"><a class="nav-link" href="Home.php"><span
+                                class="fa fa-home fa-lg"></span>
                             Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
                                 class="fa fa-info fa-lg"></span> About</a></li>
@@ -132,8 +133,7 @@
                     <div class="form-group row">
                         <div class="offset-md-2 col-md-4">
                             <button type="submit" class="btn btn-primary btn-sm ml-1">Search A Ticket</button>
-                            <button type="button" class="btn btn-secondary btn-sm ml-auto"
-                                data-dismiss="modal">Cancel</button>
+                            <input type="submit" value="Cancel" name="cancel" class="btn btn-sm btn-primary">
                         </div>
                     </div>
                 </form>
@@ -155,10 +155,14 @@
                 // output data of each row
                 // print_r($row);
                 while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
-                    echo "<tr><td>" . $row["TICKET_NO"] . "</td><td>" . $row["TICKET_DATE"] . "</td><td>" . $row["TICKET_DESCRIPTION"] . "</td><td>" . $row["TICKET_TIME"] . "</td><td>" . $row["DESTINATION_FROM"] . "</td><td>" . $row["DESTINATION_TO"] . "</td><td>" . "<a href='../views/ticket.php?TICKET_ID=" . $row["TICKET_ID"] . "'>View</a>" . "</td></tr>";
+                    echo "<tr><td>" . $row["TICKET_NO"] . "</td><td>" . $row["TICKET_DATE"] . "</td><td>" . $row["TICKET_DESCRIPTION"] . "</td><td>" . $row["TICKET_TIME"] . "</td><td>" . $row["DESTINATION_FROM"] . "</td><td>" . $row["DESTINATION_TO"] . "</td><td>" . "<a class='btn btn-sm btn-primary pr-5' href='../views/ticket.php?TICKET_ID=" . $row["TICKET_ID"] . "'>View</a>" . "</td></tr>";
                 }
                 echo "</table>";
                 $connection->CloseCon($conobj);
+            } else if (isset($_POST['cancel'])) {
+                // Redirect the browser to CustomerHome.php
+                header("Location: Home.php");
+                return;
             } else {
                 echo "0 results";
             }

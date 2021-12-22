@@ -176,9 +176,9 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
                 $error = "Error: " . $result . "<br>" . $conn->error;
             }
         }
-        function ShowLocation($conn, $table)
+        function ShowLocation($conn, $table,$trainNo)
         {
-            $result = oci_parse($conn, "SELECT * FROM $table");
+            $result = oci_parse($conn, "SELECT * FROM $table where train_no='$trainNo'");
             return $result;
         }
         function ShowAllByCustomerID($conn, $table, $customer_id)
@@ -213,9 +213,9 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
             $result = oci_parse($conn, "select t.*,p.payment_amount,p.payment_description,d.DESTINATION_FROM,d.DESTINATION_TO from ticket t,payment p,destination d where TICKET_ID= '$ticket_id' and t.PAYMENT_ID=p.PAYMENT_ID and t.DESTINATION_ID=d.DESTINATION_ID");
             return $result;
         }
-        function ShowAvailableCar($conn, $table, $availability)
+        function ShowUserProfile($conn, $table, $id)
         {
-            $result = $conn->query("SELECT * FROM $table  WHERE availability= '$availability'");
+            $result = oci_parse($conn,"SELECT * FROM $table  WHERE users_id= '$id'");
             return $result;
         }
         function GetCarByName($conn, $table, $name)

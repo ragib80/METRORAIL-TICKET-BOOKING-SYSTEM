@@ -54,13 +54,16 @@ include('../models/db.php');
                     <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
                                 class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
-                                class="fa fa-info fa-lg"></span> My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
+                                class="fa fa-info fa-lg"></span>
+                            My
+                            Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                class="fa fa-address-card fa-lg"></span> Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php"><span
+                                class="fa fa-sign-out fa-lg"></span>
+                            Log Out</a></li>
                 </ul>
                 <!-- Modal Login-->
 
