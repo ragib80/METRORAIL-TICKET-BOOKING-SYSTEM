@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="../asset/css/mycss.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+     <link rel="stylesheet" type="text/css" href="../asset/css/styles.css">
+     <title>About Us</title>
+
+</head>
+
+<body>
+      <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+         <div class="container">
+             <a class="navbar-brand mr-auto" href="#"><img src="Pictures/icon.jpg" height="30" width="41"></a>
+             <div class="collapse navbar-collapse" id="Navbar">
+                 <ul class="navbar-nav mr-auto">
+                     <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span>
+                             Home</a></li>
+                     <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
+                                 class="fa fa-info fa-lg"></span> About</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Menu</a>
+                     </li>
+                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
+                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
+                 </ul>
+                 <!-- Modal Login-->
+                 <span class="navbar-text">
+                     <!-- <a data-toggle="modal" data-target="#loginModal"> -->
+                     <a role="button" id="login">
+
+                         <span class="fa fa-sign-in"></span> Login</a>
+                 </span>
+                 <!-- Modal Login -->
+             </div>
+
+         </div>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+             <span class="navbar-toggler-icon"></span>
+         </button>
+     </nav>
+   <!-- Login Modal Start -->
+     <div id="loginModal" class="modal fade" role="dialog">
+         <div class="modal-dialog modal-lg" role="content">
+             <!-- Modal content-->
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h4 class="modal-title">Login </h4>
+                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                     <button type="button" class="close" id="hidel">&times;</button>
+                 </div>
+                 <div class="modal-body">
+                     <?php
+                        // Note triple not equals and think how badly double
+                        // not equals would work here...
+                        if ($error !== false) {
+                            // Look closely at the use of single and double quotes
+                            echo ('<p style="color: red;" class="col-sm-10 col-sm-offset-2">' .
+                                htmlentities($error) .
+                                "</p>\n");
+                        }
+                        ?>
+                     <p id="error">
+                     </p>
+                     <form method="post">
+                         <div class="form-row">
+                             <div class="form-group col-sm-4">
+                                 <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                                 <input type="email" name="email" id="email" class=" form-control form-control-sm mr-1"
+                                     id="exampleInputEmail3" placeholder="Enter email">
+                             </div>
+                             <div class="form-group col-sm-4">
+                                 <label class="sr-only" for="exampleInputPassword3">Password</label>
+                                 <input type="password" name="pass" id="pass" class="form-control form-control-sm mr-1"
+                                     id="exampleInputPassword3" placeholder="Password">
+                             </div>
+                             <div class="col-sm-auto">
+                                 <div class="form-check">
+                                     <input class="form-check-input" type="checkbox">
+                                     <label class="form-check-label"> Remember me
+                                     </label>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="form-row">
+                             <button type="button" class="btn btn-secondary btn-md ml-auto"
+                                 data-dismiss="modal">Cancel</button>
+                             <button type="submit" id="loginButton" value="Login" name="login"
+                                 class="btn btn-primary btn-md ml-1">Log in</button>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!--Login  Modal End -->
+     <!-- Reserve Modal Start -->
+     <div id="reserveModal" class="modal fade" role="dialog">
+         <div class="modal-dialog modal-lg" role="content">
+             <!--Reserve  Modal content-->
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h4 class="modal-title">Search A Ticket</h4>
+                     <button type="button" class="close" id="hider">&times;</button>
+                 </div>
+                 <div class="modal-body">
+                     <form class="form-check" id="ReserveTable" action="Search.php" method="POST">
+                         <div class="form-group row">
+                             <label for="from" class="col-12 col-md-2 col-form-label">From</label>
+                             <div class="col-7 col-md-10">
+                                 <input type="text" class="form-control" id="from" name="from" placeholder="From">
+                             </div>
+                         </div>
+                         <div class="form-group row">
+                             <label for="from" class="col-12 col-md-2 col-form-label">To</label>
+                             <div class="col-7 col-md-10">
+                                 <input type="text" class="form-control" id="to" name="to" placeholder="To">
+                             </div>
+                         </div>
+
+                         <div class="form-group row">
+                             <label for="dateandtime" class="col-md-2 col-form-label">Date</label>
+                             <div class="col-md-5">
+                                 <input type="text" class="form-control" id="date" name="date" placeholder="Date">
+                             </div>
+
+                         </div>
+                         <div class="form-group row">
+                             <div class="offset-md-2 col-md-4">
+                                 <button type="submit" class="btn btn-primary btn-sm ml-1">Search A Ticket</button>
+                                 <button type="button" class="btn btn-secondary btn-sm ml-auto"
+                                     data-dismiss="modal">Cancel</button>
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!--Reserve Modal End -->
+
+
+
+    <div class="container">
+        <div class="row">
+                <ol class="col-12 breadcrumb">
+                <li class="breadcrumb-item"><a href="Home.php">Home</a></li>
+                <li class="breadcrumb-item active">About Us</li>
+            </ol>
+            <div class="col-12">
+               <h1>About Us</h1>
+               <hr>
+            </div>
+        </div>
+
+        <div class="row row-content">
+           <div class="col-12 col-sm-12">
+                <h1>Our History</h1>
+               <p>
+
+                   <b>INTRODUCTION:</b>
+    Metrorail Ticket Booking System is an online based system where user can book metro rail ticket from anywhere. Metrorail is a completely new addition to our day to day life public transport medium, as it’s a new transport system for the mass we wanted to make it easy accessible for the people of our country. Metrorail management system is a full fledge online based system.
+     Our Country is a small part of South Asian region with 165.6 million (2019) people and Dhaka is 3rd most densely populated city in the whole world. People from all over the country comes to the capital in search of livelihood, so public transport is the sole way of many people to travel from home to their workstations and people has to spend their valuable time by waiting in line to get on a bus to go to work also because of the narrow roads and rickshaws traffic jam is meant to happen which doubles the stress and kills more time. As metro rail is a new addition to the public transport sector people will start to rely on it on daily basis, so to remove the hassle of booking ticket from physical stations and long waiting ticket lines our project will help them on the process. People can sit on their house and book ticket to their respective destination at any given time and depart for their workstations with any hassle.
+     <br>
+     <br>
+    <b>Project Proposal:</b>
+    We discussed about the project background analysis in the first part now we are going to talk about the sole solution. As the world is daily approaching to the peak of technological achievement, our country is trying its best to cope up with the rest of the world by digitalization of its traditional systems and people are more into online based solutions to their problems rather than solving them offline. Our system is the best online based solution on following problem. By making an online based ticket booking system for the public transport people will find easy to travel through public transport and which will eventually help to eliminate traffic jam as part of the population will rely less on their personal vehicles. As the whole solution is based on the convenience of the mass it has no business objectives and its sole reason is to make peoples life easier.  
+     This online booking system will be both available on mobile application and open browsers, people can access to their account to their accounts in both platform. All the user and system information will be stored in an internal database where people can get information about any metro rail related queries by one click.
+    Though online ticket booking systems has been used in our country for travelling outside of the city there were no such platforms for the public to travel inside the city areas. As metro rail opens a new way of travelling inside the city our system of booking metro rail tickets online is unique and interesting in its own way.
+               </p>
+
+            </div>
+          
+              <div class="col-12">
+                <div class="card card-body bg-light">
+                    <blockquote class="blockquote">
+                        <p class="mb-0">I missed the first train, stood out in the rain, all day. But little did I know, when I caught the next train. There you were to sweep me away.
+</p>
+                        <footer class="blockquote-footer">Bruno Mars,
+                            <cite title="Source Title">American - Musician 
+</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 center">
+                <h1>Our Team</h1>
+            
+        </div>
+        </div>
+
+            <div class="row">
+          
+                     <div class="col-3 center">
+               <div class="card">
+                   <img src="../views/Pictures/admin.jpg" alt="photo-one" class="card-img-top">
+                   <div class="card-body">
+                       <h5>Rezwan Ahmed</h5>
+                       <p>
+                           Teacher
+                       </p>
+                       <a href="" class="btn btn-info">View Profile</a>
+                   </div>
+               </div>
+          </div>
+
+        </div>
+          <div class="row">
+           <div class="col-3">
+               <div class="card">
+                   <img src="../views/Pictures/admin.jpg" alt="photo-one" class="card-img-top">
+                   <div class="card-body">
+                       <h5>Mohammad Sayem Chowdhury</h5>
+                       <p>
+                           Student
+                       </p>
+                       <a href="" class="btn btn-info">View Profile</a>
+                   </div>
+               </div>
+          </div>
+                     <div class="col-3">
+               <div class="card">
+                   <img src="../views/Pictures/admin.jpg" alt="photo-one" class="card-img-top">
+                   <div class="card-body">
+                       <h5>Mohammad Sayem Chowdhury</h5>
+                       <p>
+                           Student
+                       </p>
+                       <a href="" class="btn btn-info">View Profile</a>
+                   </div>
+               </div>
+          </div>
+                     <div class="col-3">
+               <div class="card">
+                   <img src="../views/Pictures/admin.jpg" alt="photo-one" class="card-img-top">
+                   <div class="card-body">
+                       <h5>Mohammad Sayem Chowdhury</h5>
+                       <p>
+                           Student
+                       </p>
+                       <a href="" class="btn btn-info">View Profile</a>
+                   </div>
+               </div>
+          </div>
+                     <div class="col-3">
+               <div class="card">
+                   <img src="../views/Pictures/admin.jpg" alt="photo-one" class="card-img-top">
+                   <div class="card-body">
+                       <h5>Mohammad Sayem Chowdhury</h5>
+                       <p>
+                           Student
+                       </p>
+                       <a href="" class="btn btn-info">View Profile</a>
+                   </div>
+               </div>
+          </div>
+
+        </div>
+</div>
+  <!-- footer -->
+     <footer>
+         <div class="container footer-wrap">
+             <div class="footer-left">
+                 <ul class="footer-menu">
+                     <li><a href="">Terms and Conditions</a></li>
+                     <li><a href="">Privacy</a></li>
+                 </ul>
+
+             </div>
+             <div class="footer-right">
+                 <ul class="footer-menu">
+                     <li><a href="">Follow</a></li>
+                     <li><a href=""><i class="fab fa-facebook"></i></a></li>
+                     <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                     <li><a href=""><i class="fab fa-instagram"></i></a></li>
+
+                 </ul>
+             </div>
+         </div>
+
+
+     </footer>
+     <!-- footer -->
+     <script src="https://kit.fontawesome.com/2065a5e896.js" crossorigin="anonymous"></script>
+     <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+
+     <!-- build:js js/main.js -->
+
+     <script src="../asset/js/scripts.js"></script>
+     <!-- endbuild -->
+     <!-- JavaScript Bundle with Popper -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+     </script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+     </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
+     </script>
+ </body>
+
+ </html>

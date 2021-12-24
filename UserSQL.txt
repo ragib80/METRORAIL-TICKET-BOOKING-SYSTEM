@@ -1,0 +1,44 @@
+payment:
+
+create sequence payment_payment_id_seq start with 1 increment by 1 nocache;
+CREATE TABLE payment(payment_id NUMBER(20) CONSTRAINT PK_payment PRIMARY
+KEY, payment_description VARCHAR2(100), payment_amount FLOAT(10),users_id NUMBER(20), FOREIGN KEY (users_id) REFERENCES users(users_id));
+
+CREATE INDEX payment_index ON payment(payment_id , payment_description,payment_amount,users_id);
+INSERT INTO payment(payment_id , payment_description, payment_amount,users_id)
+VALUES(payment_payment_id_seq.NEXTVAL,'Bkash',500,1);
+
+complain :
+
+create sequence complain_complain_id_seq start with 1 increment by 1 nocache;
+
+CREATE TABLE complain(complain_id NUMBER(20) CONSTRAINT PK_complain PRIMARY
+KEY,complain_description VARCHAR2(100) ,complain_topic VARCHAR2(50), users_id NUMBER(20), FOREIGN KEY (users_id) REFERENCES users(users_id))
+CREATE INDEX complain_index ON complain(complain_id , complain_description, complain_topic);
+
+INSERT INTO complain(complain_id , complain_description , complain_topic,user_id )
+VALUES(complain_complain_id_seq.NEXTVAL,'service not satisfied','service ',1);
+
+ticket:
+create sequence ticket_ticket_id_seq start with 1 increment by 1 nocache;
+
+CREATE TABLE ticket(ticket_id NUMBER(20) CONSTRAINT PK_ticket PRIMARY
+KEY, ticket_no VARCHAR2(100) NOT NULL UNIQUE, ticket_date VARCHAR2(10),
+ticket_description VARCHAR2(50), ticket_time VARCHAR2(50), DESTINATION_ID NUMBER(20), FOREIGN KEY (DESTINATION_ID) REFERENCES destination(DESTINATION_ID),payment_id NUMBER(20), FOREIGN KEY (payment_id) REFERENCES payment(payment_id));
+
+CREATE INDEX ticket_index ON ticket(ticket_id , ticket_no ,ticket_date,ticket_description ,
+ticket_time,DESTINATION_ID);
+
+INSERT INTO ticket(ticket_id , ticket_no , ticket_date , ticket_description ,ticket_time,DESTINATION_ID,payment_id )
+VALUES(time_slot_id_seq .NEXTVAL,'1100','5/11/21','verified','11:00 PM',1,1);
+INSERT INTO ticket(ticket_id , ticket_no , ticket_date , ticket_description ,ticket_time,DESTINATION_ID,payment_id )
+VALUES(time_slot_id_seq .NEXTVAL,'1105','5/11/21','verified','11:00 PM',5,4);
+
+Users:
+
+create sequence users_users_id_seq start with 1 increment by 1 nocache;
+CREATE TABLE users(users_id NUMBER(20) CONSTRAINT PK_users PRIMARY
+KEY, users_name VARCHAR2(100) ,users_email VARCHAR2(50) ,users_password VARCHAR2(50));
+CREATE INDEX users_index ON users(users_id , users_name , users_email ,users_password );
+INSERT INTO users(users_id  , users_name ,users_email,users_password  )
+VALUES(users_users_id_seq.NEXTVAL,'sayem','sayem@gmail.com', '12345678');
