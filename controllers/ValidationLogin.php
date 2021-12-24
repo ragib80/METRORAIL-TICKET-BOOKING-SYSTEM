@@ -21,13 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $connection = new db();
         $conobj = $connection->OpenCon();
-        $userQuery = $connection->ValidateLogin($conobj, "admin", $email, $pass);
+        $userQuery = $connection->ValidateLogin($conobj, "users", $email, $pass);
         $data = oci_execute($userQuery);
         if ($data) {
             $row = oci_fetch_assoc($userQuery);
             //$_SESSION['username'] = $user;
-            $_SESSION['username'] = $row['ADMIN_EMAIL'];
-            $_SESSION['userid'] = $row['ADMIN_ID'];
+            $_SESSION['username'] = $row['USERS_EMAIL'];
+            $_SESSION['userid'] = $row['USERS_ID'];
             // $_SESSION['id'] = $id;
             $_SESSION['time_start_login'] = time();
             header("location: ../views/UserHome.php");

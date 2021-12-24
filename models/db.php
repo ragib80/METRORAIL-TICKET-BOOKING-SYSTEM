@@ -18,7 +18,7 @@
         function OpenCon()
         {
             $dbhost = "localhost/xe";
-            $dbuser = "scott";
+            $dbuser = "project";
             $dbpass = "tiger";
             // $db = "ridehub";
 
@@ -84,9 +84,9 @@ VALUES('$name','$email','$password','$type')";
             }
         }
 
-        function InsertComplain($conn, $table, $complain, $type,$users_id)
+        function InsertComplain($conn, $table, $complain, $type, $users_id, $status)
         {
-            $data = oci_parse($conn, "insert into $table VALUES (complain_complain_id_seq.NEXTVAL,'" . $complain . "','" . $type . "','" . $users_id . "')");
+            $data = oci_parse($conn, "insert into $table VALUES (complain_complain_id_seq.NEXTVAL,'" . $complain . "','" . $type . "','" . $users_id . "','" . $status . "')");
             return $data;
         }
         function InsertPaymentRequest($conn, $table, $PAYMENT_ID, $PAYMENT_DESCRIPTION, $PAYMENT_AMOUNT, $USERS_ID)
@@ -102,7 +102,7 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
         function ValidateLogin($conn, $table, $email, $password)
         {
 
-            $data = oci_parse($conn, "select * from $table where ADMIN_EMAIL='$email' and ADMIN_PASSWORD='$password'");
+            $data = oci_parse($conn, "select * from $table where USERS_EMAIL='$email' and USERS_PASSWORD='$password'");
             return $data;
         }
 
@@ -176,7 +176,7 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
                 $error = "Error: " . $result . "<br>" . $conn->error;
             }
         }
-        function ShowLocation($conn, $table,$trainNo)
+        function ShowLocation($conn, $table, $trainNo)
         {
             $result = oci_parse($conn, "SELECT * FROM $table where train_no='$trainNo'");
             return $result;
@@ -186,12 +186,12 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
             $result = $conn->query("SELECT * FROM $table WHERE customer_id='$customer_id' ");
             return $result;
         }
-        function ShowComplain($conn, $table,$users_id)
+        function ShowComplain($conn, $table, $users_id)
         {
             $result = oci_parse($conn, "SELECT * From $table where users_id='$users_id' order by complain_id desc");
             return $result;
         }
-        function ShowPurchasedTicket($conn, $table,$users_id)
+        function ShowPurchasedTicket($conn, $table, $users_id)
         {
             $result = oci_parse($conn, "SELECT * From $table where users_id='$users_id' order by payment_id desc");
             return $result;
@@ -215,7 +215,7 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
         }
         function ShowUserProfile($conn, $table, $id)
         {
-            $result = oci_parse($conn,"SELECT * FROM $table  WHERE users_id= '$id'");
+            $result = oci_parse($conn, "SELECT * FROM $table  WHERE users_id= '$id'");
             return $result;
         }
         function GetCarByName($conn, $table, $name)
