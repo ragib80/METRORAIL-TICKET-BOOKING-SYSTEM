@@ -25,8 +25,7 @@
      <meta http-equiv="x-ua-compatible" content="ie=edge">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <link rel="stylesheet" type="text/css" href="../asset/css/mycss.css">
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
      <link rel="stylesheet" type="text/css" href="../asset/css/styles.css">
 
      <title>Home</title>
@@ -40,12 +39,10 @@
                  <ul class="navbar-nav mr-auto">
                      <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span>
                              Home</a></li>
-                     <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
-                                 class="fa fa-info fa-lg"></span> About</a></li>
+                     <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span class="fa fa-info fa-lg"></span> About</a></li>
                      <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-list fa-lg"></span> Menu</a>
                      </li>
-                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                 class="fa fa-address-card fa-lg"></span> Contact</a></li>
+                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
                  </ul>
                  <!-- Modal Login-->
                  <span class="navbar-text">
@@ -73,6 +70,9 @@
                      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                      <button type="button" class="close" id="hidel">&times;</button>
                  </div>
+                 <div>
+                     <a href="AdminLoginindex.php" class="btn btn-outline-dark"> Admin</a>
+                 </div>
                  <div class="modal-body">
                      <?php
                         // Note triple not equals and think how badly double
@@ -90,13 +90,11 @@
                          <div class="form-row">
                              <div class="form-group col-sm-4">
                                  <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                                 <input type="email" name="email" id="email" class=" form-control form-control-sm mr-1"
-                                     id="exampleInputEmail3" placeholder="Enter email">
+                                 <input type="email" name="email" id="email" class=" form-control form-control-sm mr-1" id="exampleInputEmail3" placeholder="Enter email">
                              </div>
                              <div class="form-group col-sm-4">
                                  <label class="sr-only" for="exampleInputPassword3">Password</label>
-                                 <input type="password" name="pass" id="pass" class="form-control form-control-sm mr-1"
-                                     id="exampleInputPassword3" placeholder="Password">
+                                 <input type="password" name="pass" id="pass" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
                              </div>
                              <div class="col-sm-auto">
                                  <div class="form-check">
@@ -107,10 +105,8 @@
                              </div>
                          </div>
                          <div class="form-row">
-                             <button type="button" class="btn btn-secondary btn-md ml-auto"
-                                 data-dismiss="modal">Cancel</button>
-                             <button type="submit" id="loginButton" value="Login" name="login"
-                                 class="btn btn-primary btn-md ml-1">Log in</button>
+                             <button type="button" class="btn btn-secondary btn-md ml-auto" data-dismiss="modal">Cancel</button>
+                             <button type="submit" id="loginButton" value="Login" name="login" class="btn btn-primary btn-md ml-1">Log in</button>
                          </div>
                      </form>
                  </div>
@@ -152,8 +148,7 @@
                          <div class="form-group row">
                              <div class="offset-md-2 col-md-4">
                                  <button type="submit" class="btn btn-primary btn-sm ml-1">Search A Ticket</button>
-                                 <button type="button" class="btn btn-secondary btn-sm ml-auto"
-                                     data-dismiss="modal">Cancel</button>
+                                 <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
                              </div>
                          </div>
                      </form>
@@ -194,8 +189,7 @@
                  <div id="mycarousel" class="carousel slide" data-ride="carousel">
                      <div class="carousel-inner" role="listbox">
                          <div class="carousel-item active">
-                             <img class="img-fluid" src="Pictures/Dhaka-Metro-Mass-Rapid-Transit-System.jpg"
-                                 alt="metro rail">
+                             <img class="img-fluid" src="Pictures/Dhaka-Metro-Mass-Rapid-Transit-System.jpg" alt="metro rail">
 
                          </div>
                          <div class="carousel-item">
@@ -285,14 +279,11 @@
      <script src="../asset/js/scripts.js"></script>
      <!-- endbuild -->
      <!-- JavaScript Bundle with Popper -->
-     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
      </script>
-     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
      </script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
      </script>
  </body>
 

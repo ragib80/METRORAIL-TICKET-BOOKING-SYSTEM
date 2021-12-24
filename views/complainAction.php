@@ -77,6 +77,10 @@
                         <h3>Complain Status: <?php echo $STATUS ?></h3>
 
                         <a href="complaindetails.php" class="btn btn-lg btn-success">Back </a>
+                        <a class="btn btn-lg btn-success" href='complainStatusChange.php?COMPLAIN_ID=<?php echo $_GET['COMPLAIN_ID'] ?>'>Change Status </a>
+
+                        <a href='delete-inline.php?id=<?php echo $row['ID']; ?>'>Delete</a>
+
 
                     </form>
                 </div>

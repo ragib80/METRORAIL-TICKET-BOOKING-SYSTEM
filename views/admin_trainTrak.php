@@ -13,6 +13,8 @@
     <link href="../Asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="../Asset/css/ruang-admin.min.css" rel="stylesheet">
     <link href="../Asset/css/table.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../asset/css/mycss.css">
+    <title>Ticket Location</title>
 </head>
 
 <body id="page-top">
@@ -37,7 +39,24 @@
 
                 <a class='btn btn-outline-danger' href='logout.php'> Logout </a>
             </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap" aria-expanded="true" aria-controls="collapseBootstrap">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Booking Tickets</span>
+                </a>
 
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Bootstrap UI</h6>
+                        <a class="collapse-item" href="alerts.html">Alerts</a>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
+                        <a class="collapse-item" href="modals.html">Modals</a>
+                        <a class="collapse-item" href="popovers.html">Popovers</a>
+                        <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
+                    </div>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="PurchasedTicketHistory.php" data-toggle="collapse" data-target="#collapseForm" aria-expanded="true" aria-controls="collapseForm">
                     <i class="fab fa-fw fa-wpforms"></i>
@@ -66,7 +85,12 @@
                     </div>
                 </div>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="ui-colors.html">
+                    <i class="fas fa-fw fa-palette"></i>
+                    <span>Previous Journey</span>
+                </a>
+            </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Complains
@@ -125,6 +149,60 @@
                 <script src="js/ruang-admin.min.js"></script>
                 <script src="vendor/chart.js/Chart.min.js"></script>
                 <script src="js/demo/chart-area-demo.js"></script>
+                <section>
+                    <div class="container mt-5">
+                        <h1>
+                            Train Location
+                        </h1>
+                        <div class="modal-body">
+                            <form class="form-check" id="ReserveTable" action="admin_trainTrak.php" method="POST">
+                                <div class="form-group row">
+                                    <label for="from" class="col-12 col-md-2 col-form-label">Train No: </label>
+                                    <div class="col-7 col-md-10">
+                                        <input type="text" class="form-control" id="trainNo" name="trainNo" placeholder="Train No:">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="offset-md-2 col-md-4">
+                                        <button type="submit" class="btn btn-primary btn-sm ml-1">Search Location</button>
+                                        <a href="adminDashboard.php" class="btn btn-sm btn-primary">Cancel</a>
+
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <?php
+                        // session_start();
+
+                        include('../models/db.php');
+                        $connection = new db();
+                        $conobj = $connection->OpenCon();
+                        if (isset($_POST['cancel'])) {
+                            // Redirect the browser to CustomerHome.php
+                            header("Location: adminDashboard.php");
+                            return;
+                        }
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            $trainNo = $_POST['trainNo'];
+                            $userQuery = $connection->ShowLocation($conobj, "trainLocation", $trainNo);
+                            oci_execute($userQuery);
+                            // $row = oci_fetch_assoc($userQuery);
+                            // if (oci_num_rows($userQuery) > 0) {
+                            echo "<table><tr><th>LOCATION_ID</th><th>TRAIN_NO</th><th>TRAIN_LOCATION</th><th>TRAIN_DEPATURE</th></tr>";
+                            // output data of each row
+                            // print_r($row);
+                            while ($row = oci_fetch_array($userQuery, OCI_RETURN_NULLS + OCI_ASSOC)) {
+                                echo "<tr><td>" . $row["LOCATION_ID"] . "</td><td>" . $row["TRAIN_NO"] . "</td><td>" . $row["TRAIN_LOCATION"] .
+                                    "</td><td>" . $row["TRAIN_DEPATURE"] . "</td></tr>";
+                            }
+                            echo "</table>";
+                            $connection->CloseCon($conobj);
+                        }
+                        ?>
+
+                    </div>
+                </section>
 </body>
 
 </html>
