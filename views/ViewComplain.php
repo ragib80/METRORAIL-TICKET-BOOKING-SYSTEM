@@ -69,8 +69,7 @@ while ($row = oci_fetch_assoc($userQuery)) {
                             Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
                                 class="fa fa-info fa-lg"></span> My Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                class="fa fa-address-card fa-lg"></span> Contact</a></li>
+
 
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-address-card fa-lg"></span> Log Out</a></li>
