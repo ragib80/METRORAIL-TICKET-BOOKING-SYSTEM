@@ -58,10 +58,9 @@ $connection->CloseCon($conobj);
                     <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
                                 class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
                                 class="fa fa-info fa-lg"></span> My Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                class="fa fa-address-card fa-lg"></span> Contact</a></li>
+
 
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
                                 class="fa fa-sign-out fa-lg"></span> Log Out</a></li>
@@ -87,7 +86,7 @@ $connection->CloseCon($conobj);
             Password: <?php echo $password; ?>
             <hr>
             <br>
-            <a class="btn btn-lg btn-primary" href="UpdateCustomer.php">Update </a>
+            <a class="btn btn-md btn-primary" href="UpdateUser.php">Update </a>
         </div>
     </section>
     <footer>

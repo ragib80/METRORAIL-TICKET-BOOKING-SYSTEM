@@ -147,8 +147,6 @@ if (isset($_POST['proceed'])) {
                                 class="fa fa-info fa-lg"></span>
                             My
                             Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                class="fa fa-address-card fa-lg"></span> Contact</a></li>
 
                     <li class="nav-item"><a class="nav-link" href="logout.php"><span
                                 class="fa fa-sign-out fa-lg"></span>

@@ -3,7 +3,7 @@
 h1 {
   text-align: center;
   color: #1d3557;
-  font-size: 250%;
+  font-size: 150%;
   text-align: center;
   text-transform: uppercase;
   font-family: "Open Sans";
@@ -21,6 +21,18 @@ h2 {
 h3 {
   text-align: center;
   color: #1d3557;
+  font-size: 100%;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
+h5 {
+  text-align: center;
+  font-size: 120%;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
+h6 {
+  text-align: center;
   font-size: 100%;
   font-family: "Open Sans";
   font-weight: bold;
