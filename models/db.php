@@ -18,7 +18,7 @@
         function OpenCon()
         {
             $dbhost = "localhost/xe";
-            $dbuser = "scott";
+            $dbuser = "project";
             $dbpass = "tiger";
             // $db = "ridehub";
 

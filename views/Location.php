@@ -25,11 +25,6 @@
                     <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span class="fa fa-info fa-lg"></span>
                             My
                             Profile</a></li>
-<<<<<<< HEAD
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span class="fa fa-address-card fa-lg"></span> Contact</a></li>
-=======
-
->>>>>>> 419bacea90e0059ff9dbe7e2b2b6468534f8dd61
 
                     <li class="nav-item"><a class="nav-link" href="logout.php"><span class="fa fa-sign-out fa-lg"></span>
                             Log Out</a></li>
