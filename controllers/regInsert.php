@@ -7,38 +7,21 @@ $db = oci_connect($dbuser, $dbpass, $connection_string);
 
 if (isset($_POST['submit'])) {
 
-    $username = $_POST['username'];
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
-    $password = $_POST['password'];
+    $username = $_POST['USERS_NAME'];
+    $fname = $_POST['FIRST_NAME'];
+    $lname = $_POST['LAST_NAME'];
+    $email = $_POST['USERS_EMAIL'];
+
+    $password = $_POST['USERS_PASSWORD'];
 
 
     //$sql="insert into users(USERNAME, EMAIL, PASSWORD   , MOBILE, FIRST_NAME, LAST_NAME , U_CREATED_AT, U_MODIFIED_AT) VALUES('${username}','${email}','${password}','${mobile}','${fname}','${lname}','${createdat}','${updatedat}')";
 
-    $sql = "insert into users VALUES (user_U_ID_seq.NEXTVAL,'" . $username . "','" . $email . "','" . $password . "','" . $mobile . "','" . $fname . "','" . $lname . "')";
+    //working sql
+    //$sql = "insert into users VALUES (users_users_id_seq.NEXTVAL,'" . $username . "','" . $email . "','" . $password . "','" . $fname . "','" . $lname . "')";
 
-    /*$status=oci_parse($db,$sql);
-        $res=oci_execute($status);
-
-        if($status){
-        ?>
-            <script type="text/javascript">
-                alert('Inserted data in database');
-            </script>
-        <?php
-                header('location: index.html');          
-            }else{
-        ?>
-            <script type="text/javascript">
-                alert('Missing Data Input...!');
-            </script>
-        <?php
-            }
-        //}
-    }
-?>*/
+    //inser data using procedure
+    $sql = "call user_registration('" . $username . "', '" . $email . "', '" . $password . "', '" . $fname . "', '" . $lname . "')";
 
     $st = oci_parse($db, $sql);
     $r = oci_execute($st);

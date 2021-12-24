@@ -30,8 +30,7 @@ $connection->CloseCon($conobj);
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../asset/css/mycss.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../asset/css/styles.css">
     <title>User Profile</title>
 
@@ -45,15 +44,12 @@ $connection->CloseCon($conobj);
             <a class="navbar-brand mr-auto" href="#"><img src="Pictures/icon.jpg" height="30" width="41"></a>
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
-                                class="fa fa-home fa-lg"></span>
+                    <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
-                                class="fa fa-info fa-lg"></span> My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span class="fa fa-info fa-lg"></span> My Profile</a></li>
 
 
-                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span
-                                class="fa fa-sign-out fa-lg"></span> Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./contactus.html"><span class="fa fa-sign-out fa-lg"></span> Log Out</a></li>
                 </ul>
                 <!-- Modal Login-->
 

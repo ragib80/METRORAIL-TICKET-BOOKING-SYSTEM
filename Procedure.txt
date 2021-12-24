@@ -1,0 +1,23 @@
+----user_registration-----
+
+create or replace procedure user_registration(username users.USERS_NAME%type , email users.USERS_EMAIL%type , fname users.FIRST_NAME%type, lname users.LAST_NAME%type, password users.USERS_PASSWORD%type ) is
+begin
+
+insert into users (USERS_ID,USERS_NAME,USERS_EMAIL,FIRST_NAME,LAST_NAME,USERS_PASSWORD) Values (users_users_id_seq.NEXTVAL,username,email,fname,lname,password );
+commit;
+
+end user_registration;
+
+
+----Complain-----
+
+create or replace procedure add_complain(com_des complain.COMPLAIN_DESCRIPTION%type , com_top complain.COMPLAIN_TOPIC%type, u_id complain.USERS_ID%type, sts complain.STATUS%type) is
+
+begin
+
+insert into complain(COMPLAIN_ID,COMPLAIN_DESCRIPTION,COMPLAIN_TOPIC,USERS_ID,STATUS ) Values (complain_complain_id_seq.NEXTVAL, com_des , com_top, u_id, sts);
+commit;
+
+end add_complain;
+
+
