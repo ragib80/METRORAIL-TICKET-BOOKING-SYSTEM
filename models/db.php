@@ -144,49 +144,13 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
             $result = oci_parse($conn, "SELECT * FROM $table  WHERE users_id= '$id'");
             return $result;
         }
-        function GetCarByName($conn, $table, $name)
-        {
-            $result = $conn->query("SELECT * FROM $table  WHERE carname= '$name'");
-            return $result;
-        }
+   
         function DeleteComplain($conn, $table, $complain_id)
         {
             $result = oci_parse($conn, "DELETE FROM $table WHERE complain_id = '$complain_id'");
             return $result;
         }
-        function DeleteVendor($conn, $table, $vendor_id)
-        {
-            $result = $conn->query("DELETE FROM $table WHERE vendor_id = '$vendor_id'");
-            return $result;
-        }
-        function DeleteDriver($conn, $table, $driver_id)
-        {
-            $result = $conn->query("DELETE FROM $table WHERE driver_id = '$driver_id'");
-            return $result;
-        }
-        function DeleteCar($conn, $table, $car_id)
-        {
-            $result = $conn->query("DELETE FROM $table WHERE car_id = '$car_id'");
-            return $result;
-        }
-        function DeleteFromLogin($conn, $table, $email)
-        {
-            $result = $conn->query("DELETE FROM $table WHERE email = '$email'");
-            return $result;
-        }
-        function UpdateCarRequest($conn, $table, $req_id, $status_vendor)
-        {
-
-            $result = "UPDATE $table SET status_vendor='$status_vendor' WHERE req_id='$req_id'";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
-            return $result;
-        }
-
+      
         function CloseCon($conn)
         {
             oci_close($conn);
