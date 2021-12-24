@@ -18,7 +18,7 @@
         function OpenCon()
         {
             $dbhost = "localhost/xe";
-            $dbuser = "project";
+            $dbuser = "scott";
             $dbpass = "tiger";
             // $db = "ridehub";
 
@@ -70,18 +70,12 @@ VALUES('$name','$email','$password','$type','$phone','$birthday','$address','$dr
             }
         }
 
-        function InsertLogin($conn, $table, $name, $email, $password, $type)
+        function UpdateUserProfile($conn, $table, $name, $id, $password)
         {
             $error = "";
-            $result = "INSERT INTO " . $table . " (name,email,password,type)
-VALUES('$name','$email','$password','$type')";
-            if ($conn->query($result) === TRUE) {
-                $success = "Data inserted into login table successfully";
-                header('Location:login.php');
-                return $result . $success;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
+            $sql = "UPDATE " . $table . " SET users_name='" . $name . "', users_password='" . $password . "' WHERE users_id='" . $id . "'";
+            $result = oci_parse($conn, $sql);
+            return $result;
         }
 
         function InsertComplain($conn, $table, $complain, $type, $users_id, $status)
@@ -108,74 +102,6 @@ VALUES(payment_payment_id_seq.NEXTVAL,'$PAYMENT_DESCRIPTION',$PAYMENT_AMOUNT,$US
 
 
 
-        function UpdateVendor($conn, $table, $name, $email, $pass, $address, $phone)
-
-        {
-            $result = "UPDATE $table SET name='$name', email='$email',password='$pass', address='$address' , phone='$phone' WHERE email='$email'";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result . $error;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
-        }
-        function UpdateCustomer($conn, $table, $name, $email, $pass, $address, $phone)
-
-        {
-            $result = "UPDATE $table SET name='$name', email='$email',password='$pass', address='$address' , phone='$phone' WHERE email='$email'";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result . $error;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
-        }
-        function UpdateCustomerAll($conn, $table, $name, $customer_id, $pass, $address, $phone)
-
-        {
-
-            $result = "UPDATE $table SET name='$name',password='$pass', address='$address' , phone='$phone' WHERE customer_id='$customer_id'";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result . $error;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
-        }
-        function UpdateCarAll($conn, $table, $car_id, $carname, $carm, $scount, $availability, $fare)
-
-        {
-            $result = "UPDATE $table SET carname='$carname',carmodel='$carm', sitcount='$scount' , availability='$availability', fareperh= '$fare' WHERE car_id='$car_id'";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result . $error;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
-        }
-        function UpdateVendorAll($conn, $table, $name, $vendor_id, $pass, $address, $phone)
-
-        {
-            $result = "UPDATE $table SET name='$name',password='$pass', address='$address' , phone='$phone' WHERE vendor_id='$vendor_id'";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result . $error;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
-        }
-
-        function UpdateDriver($conn, $table, $name, $email, $pass, $phone, $address)
-
-        {
-            $result = "UPDATE $table SET name='$name', email='$email',password='$pass',  phone='$phone' , address='$address'  WHERE email='$email'";
-            $error = "";
-            if ($conn->query($result) === TRUE) {
-                return $result . $error;
-            } else {
-                $error = "Error: " . $result . "<br>" . $conn->error;
-            }
-        }
         function ShowLocation($conn, $table, $trainNo)
         {
             $result = oci_parse($conn, "SELECT * FROM $table where train_no='$trainNo'");

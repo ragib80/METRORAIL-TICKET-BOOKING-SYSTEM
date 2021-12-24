@@ -1,20 +1,10 @@
 <?php
 session_start();
-include('../models/db.php');
-// $email = $_SESSION["email"];
-// if (!isset($_SESSION['email'])) {
-//     header('Location: login.php');
-// } else if (isset($_SESSION['email'])) {
-//     if ($_SESSION['type'] == "Vendor") {
-//         header('Location: VendorHome.php');
-//     }
-//     if ($_SESSION['type'] == "Admin") {
-//         header('Location: AdminHome.php');
-//     }
-//     if ($_SESSION['type'] == "driver") {
-//         header('Location: DriverHome.php');
-//     }
-// }
+if (empty($_SESSION["userid"])) {
+    header("Location: ../controllers/login.php"); // Redirecting To Home Page
+}
+
+include('../controllers/UpdateUserProfile.php');
 
 $connection = new db();
 $conobj = $connection->OpenCon();
@@ -30,8 +20,8 @@ $password = $row['USERS_PASSWORD'];
 
 
 $connection->CloseCon($conobj);
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,19 +66,44 @@ $connection->CloseCon($conobj);
         </button>
     </nav>
 
-    <section class="pad-70 right m-5">
+
+    <!-- main  -->
+    <p id="msg">
+        <?php echo $error ?>
+    </p>
+    <section class="pad-70">
         <div class="container">
-            <p><img src="Pictures/customer.jpg" alt="Home" class="center"></p>
-            Name: <?php echo $name; ?>
-            <hr>
-            Email: <?php echo $email; ?>
-            <hr>
-            Password: <?php echo $password; ?>
-            <hr>
-            <br>
-            <a class="btn btn-md btn-primary" href="UpdateUser.php">Update </a>
+            <form action='' method='post'>
+                <div class="form-row">
+                    <div class="form-group">
+                        Name:
+                        <input type="text" name="name" value="<?php echo $name; ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+
+                        Password:
+                        <input type="text" name="pass" value="<?php echo $password; ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        Email:
+                        <input type="text" name="email" value="<?php echo $email; ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="submit" value="Update" name="update" class="btn btn-md btn-primary btn-submit">
+                        <a class="btn btn-md btn-success m-1" href="UserProfile.php">Back</a>
+                    </div>
+                </div>
+        </div>
+        </form>
         </div>
     </section>
+    <!-- footer  -->
     <footer>
         <div class="container footer-wrap">
             <div class="footer-left">

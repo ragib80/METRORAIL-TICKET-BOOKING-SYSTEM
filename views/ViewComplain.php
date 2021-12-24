@@ -34,8 +34,8 @@ while ($row = oci_fetch_assoc($userQuery)) {
     $COMPLAIN_TOPIC = $row['COMPLAIN_TOPIC'];
 }
 
-    // header("../views/PreviousComplain.php");
-    $connection->CloseCon($conobj);
+// header("../views/PreviousComplain.php");
+$connection->CloseCon($conobj);
 
 
 ?>
@@ -67,7 +67,7 @@ while ($row = oci_fetch_assoc($userQuery)) {
                     <li class="nav-item active"><a class="nav-link" href="UserHome.php"><span
                                 class="fa fa-home fa-lg"></span>
                             Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="./aboutus.html"><span
+                    <li class="nav-item"><a class="nav-link" href="UserProfile.php"><span
                                 class="fa fa-info fa-lg"></span> My Profile</a></li>
 
 
