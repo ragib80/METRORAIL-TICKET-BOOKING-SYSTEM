@@ -166,15 +166,22 @@
              <div class="row row-header">
                  <div class="col-12 col-sm-8">
                      <h1>Welcome To Metro Rail Bangladesh</h1>
-                     <p>In a view to implement Dhaka City's 20-year long Strategic Transport (STP), Bangladesh
-                         Government invited Japan International Cooperation Agency (JICA) to conduct a primary survey
-                         and feasibility study on the transport system of Dhaka back in 2009–2010. In 2012 the
-                         Government's Executive Committee of National Economic Council (ECNEC) approved the project. A
-                         loan agreement between Bangladesh Government and JICA was signed in January 2013. The same
-                         year, Dhaka Mass Transit Company Ltd. (DMTC), the implementing agency of MRT Line-6 project was
-                         formed. The General Consultant (GC) namely the NKDM Association commenced work from February
-                         2014. In June 2013, Dhaka Mass Transit Company Limited (DMTC) was established by the Government
-                         to implement the Metro Rail Lines across the city.</p>
+                     <p class="text-left">Metrorail Ticket Booking System is an online based system where user can book
+                         metro
+                         rail ticket
+                         from anywhere. Metrorail is a completely new addition to our day to day life public transport
+                         medium, as it’s a new transport system for the mass we wanted to make it easy accessible for
+                         the people of our country. Metrorail management system is a full fledge online based system.
+                         Our Country is a small part of South Asian region with 165.6 million (2019) people and Dhaka is
+                         3rd most densely populated city in the whole world. People from all over the country comes to
+                         the capital in search of livelihood, so public transport is the sole way of many people to
+                         travel from home to their workstations and people has to spend their valuable time by waiting
+                         in line to get on a bus to go to work also because of the narrow roads and rickshaws traffic
+                         jam is meant to happen which doubles the stress and kills more time. As metro rail is a new
+                         addition to the public transport sector people will start to rely on it on daily basis, so to
+                         remove the hassle of booking ticket from physical stations and long waiting ticket lines our
+                         project will help them on the process. People can sit on their house and book ticket to their
+                         respective destination at any given time and depart for their workstations with any hassle.</p>
                  </div>
 
                  <div class="col-12 col-sm-4 align-self-center">
